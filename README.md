@@ -1,4 +1,4 @@
-# COMP-2522-Term-Project
+# COMP-2522-Term-Project-ChristieBelal
 
 ## Your names:
 Christie Tsang & Belal Kourkmas
