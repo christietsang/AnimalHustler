@@ -1,3 +1,28 @@
-/.idea/
-/522-202210-Term-Project-ChristieBelal.iml
-/ChristieBelal.iml
+*.class
+
+# Package Files #
+*.war
+*.ear
+
+# Eclipse #
+.classpath
+.project
+.settings/
+bin/
+
+# IDEA #
+.idea/
+*.iml
+out/
+
+# Maven #
+dependency-reduced-pom.xml
+target/
+
+# Gradle #
+.gradle/
+
+# logs #
+*.log
+logs/
+system/

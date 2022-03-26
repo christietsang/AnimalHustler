@@ -1,8 +1,6 @@
-module ca.bcit.comp2522.termproject.christiebelal {
-    requires javafx.controls;
-    requires javafx.fxml;
-
-
-    opens ca.bcit.comp2522.termproject.christiebelal to javafx.fxml;
-    exports ca.bcit.comp2522.termproject.christiebelal;
+/**
+ * @author Almas Baimagambetov (almaslvl@gmail.com)
+ */
+open module com.almasb.main {
+    requires com.almasb.fxgl.all;
 }
