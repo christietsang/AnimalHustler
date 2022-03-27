@@ -11,6 +11,8 @@ import com.almasb.fxgl.physics.box2d.dynamics.BodyType;
 import javafx.geometry.BoundingBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import static ca.bcit.comp2522.termproject.christiebelal.AnimalHustlerType.*;
+
 
 import static com.almasb.fxgl.dsl.FXGLForKtKt.entityBuilder;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.onKeyDown;
@@ -27,4 +29,14 @@ public class AnimalHustlerFactory implements EntityFactory {
                 .viewWithBBox(new Rectangle(12, 12, Color.BLACK))
                 .build();
     }
+
+    @Spawns("wall")
+    public Entity newWall(SpawnData data){
+        return entityBuilder(data)
+                .type(WALL)
+                .viewWithBBox(new Rectangle(data.<Integer>get("width"), data.<Integer>get("height")))
+                .collidable()
+                .build();
+    }
+
 }

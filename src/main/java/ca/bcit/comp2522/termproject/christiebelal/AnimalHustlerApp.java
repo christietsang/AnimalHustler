@@ -6,6 +6,7 @@ import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.level.Level;
 import com.almasb.fxgl.time.Timer;
 import javafx.scene.input.KeyCode;
+import static ca.bcit.comp2522.termproject.christiebelal.AnimalHustlerType.*;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
