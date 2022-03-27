@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="25" height="20" tilewidth="36" tileheight="36" infinite="0" nextlayerid="11" nextobjectid="1">
- <tileset firstgid="1" name="First Asset pack enlarged" tilewidth="36" tileheight="36" tilecount="1024" columns="32">
-  <image source="../assets/map/First Asset pack enlarged.png" width="1152" height="1152"/>
+ <tileset firstgid="1" name="MapAssets" tilewidth="36" tileheight="36" tilecount="1024" columns="32">
+  <image source="MapAssets.png" width="1152" height="1152"/>
  </tileset>
- <tileset firstgid="1025" name="TX Props" tilewidth="36" tileheight="36" tilecount="196" columns="14">
-  <image source="../assets/map/TX Props.png" width="512" height="512"/>
+ <tileset firstgid="1025" name="TXProps" tilewidth="36" tileheight="36" tilecount="196" columns="14">
+  <image source="TXProps.png" width="512" height="512"/>
  </tileset>
  <tileset firstgid="1221" name="Rocks" tilewidth="36" tileheight="36" tilecount="196" columns="14">
-  <image source="../assets/map/Rocks.png" width="512" height="512"/>
+  <image source="Rocks.png" width="512" height="512"/>
  </tileset>
  <layer id="1" name="Land" width="25" height="20">
   <data encoding="csv">
