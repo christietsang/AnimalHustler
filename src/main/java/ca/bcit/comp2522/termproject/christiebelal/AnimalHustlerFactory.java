@@ -33,7 +33,6 @@ public class AnimalHustlerFactory implements EntityFactory {
                 .with(new PlayerComponent())
                 .with(new CollidableComponent(true))
                 .viewWithBBox(new Rectangle(20, 20, Color.BLACK))
-                .collidable()
                 .build();
     }
 
@@ -52,7 +51,7 @@ public class AnimalHustlerFactory implements EntityFactory {
                 .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
                 .with(new PhysicsComponent())
                 .with(new CollidableComponent(true))
-                .buildAndAttach();
+                .build();
     }
 
 }

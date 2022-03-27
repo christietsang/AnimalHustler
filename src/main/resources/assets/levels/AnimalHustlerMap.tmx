@@ -33,6 +33,41 @@
 212,212,212,212,212,212,212,212,212,84,84,84,84,84,84,84,84,439,439,439,439,439,439,439,439
 </data>
  </layer>
+ <objectgroup id="11" name="Walls">
+  <object id="64" type="wall" x="504" y="252">
+   <polygon points="0,0 0,-36 -36,-36 -72,0 -108,-36 -144,-72 -180,-72 -216,-72 -252,-108 -252,-72 -216,-36 -180,-36 -144,-36 -72,36 -36,0"/>
+  </object>
+  <object id="66" type="wall" x="612" y="720">
+   <polyline points="0,0 36,-36 72,-36 108,-36 144,-72 180,-72 216,-72 252,-108 288,-108 288,0 0,0 36,-36"/>
+  </object>
+  <object id="73" type="wall" x="612" y="0">
+   <polygon points="0,0 0,36 36,72 72,36 72,72 108,108 144,72 180,108 180,180 288,288 288,0"/>
+  </object>
+  <object id="74" type="wall" x="360" y="36">
+   <polygon points="252,0 0,0 -36,72 -72,108 -108,108 -252,108 -252,144 -288,180 -360,180 -360,-36 -36,-36 252,-36"/>
+  </object>
+  <object id="78" type="wall" x="576" y="252">
+   <polygon points="0,0 36,-36 180,-36 216,-72 216,-108 180,-72 36,-72 0,-36"/>
+  </object>
+  <object id="82" type="wall" x="108" y="180">
+   <polygon points="0,0 0,108 36,108 72,72 108,108 144,108 144,-36 0,-36"/>
+  </object>
+  <object id="83" type="wall" x="36" y="360">
+   <polygon points="0,0 0,-108 -36,-108 -36,0"/>
+  </object>
+  <object id="84" type="wall" x="180" y="288">
+   <polygon points="0,0 0,36 108,36 108,0"/>
+  </object>
+  <object id="86" type="wall" x="144" y="288">
+   <polygon points="0,0 -36,36 -108,36 -108,0 -36,0"/>
+  </object>
+  <object id="88" type="wall" x="180" y="540">
+   <polygon points="0,0 0,36 72,36 108,36 108,144 -144,144 -144,36 -36,36 -36,0 -180,0 -180,180 144,180 144,0"/>
+  </object>
+  <object id="92" type="wall" x="324" y="720" width="288"/>
+  <object id="95" type="wall" x="900" y="288" height="324"/>
+  <object id="100" type="wall" x="0" y="216" height="324"/>
+ </objectgroup>
  <layer id="2" name="Grass Blades" width="25" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,492,0,0,0,491,0,0,0,354,355,356,357,0,
