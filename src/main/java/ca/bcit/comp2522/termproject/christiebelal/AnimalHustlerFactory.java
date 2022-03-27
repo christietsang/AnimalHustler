@@ -26,7 +26,15 @@ public class AnimalHustlerFactory implements EntityFactory {
     public Entity newPlayer(SpawnData data) {
 
         return entityBuilder(data)
-                .viewWithBBox(new Rectangle(12, 12, Color.BLACK))
+                .viewWithBBox(new Rectangle(20, 20, Color.BLACK))
+                .build();
+    }
+
+    @Spawns("wall")
+    public Entity wall(SpawnData data) {
+
+        return entityBuilder(data)
+//                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
                 .build();
     }
 
