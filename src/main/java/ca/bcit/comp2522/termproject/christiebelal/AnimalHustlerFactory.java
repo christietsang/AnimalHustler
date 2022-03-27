@@ -30,13 +30,13 @@ public class AnimalHustlerFactory implements EntityFactory {
                 .build();
     }
 
-    @Spawns("wall")
-    public Entity wall(SpawnData data) {
+//    @Spawns("wall")
+//    public Entity wall(SpawnData data) {
 
-        return entityBuilder(data)
+//        return entityBuilder(data)
 //                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
-                .build();
-    }
+//                .build();
+//    }
 
     @Spawns("wall")
     public Entity newWall(SpawnData data){

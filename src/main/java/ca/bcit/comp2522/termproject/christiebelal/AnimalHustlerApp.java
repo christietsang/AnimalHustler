@@ -9,6 +9,7 @@ import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.time.Timer;
 import javafx.scene.input.KeyCode;
 
+
 import static ca.bcit.comp2522.termproject.christiebelal.AnimalHustlerType.*;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
@@ -44,18 +45,21 @@ public class AnimalHustlerApp extends GameApplication {
                 player.translate(5, 0);
             }
         }, KeyCode.D);
+
         input.addAction(new UserAction("Move Left") {
             @Override
             protected void onAction() {
                 player.translate(-5, 0);
             }
         }, KeyCode.A);
+
         input.addAction(new UserAction("Move Up") {
             @Override
             protected void onAction() {
                 player.translate(0, -5);
             }
         }, KeyCode.W);
+
         input.addAction(new UserAction("Move Down") {
             @Override
             protected void onAction() {
@@ -69,7 +73,7 @@ public class AnimalHustlerApp extends GameApplication {
         getGameWorld().addEntityFactory(new AnimalHustlerFactory());
 
         Level level = setLevelFromMap("AnimalHustlerMap.tmx");
-        spawn("player", 500, 500);
+        player = spawn("player", 450, 450);
     }
 
     public static void main(String[] args) {
