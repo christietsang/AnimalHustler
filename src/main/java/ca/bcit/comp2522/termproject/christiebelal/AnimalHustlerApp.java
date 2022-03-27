@@ -4,11 +4,8 @@ import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.level.Level;
-import com.almasb.fxgl.input.Input;
-import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.time.Timer;
 import javafx.scene.input.KeyCode;
-import javafx.util.Duration;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
@@ -18,7 +15,6 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 public class AnimalHustlerApp extends GameApplication {
 
     private Entity player;
-
     public final Timer getMasterTimer() {
         return getMasterTimer();
     }
@@ -28,47 +24,19 @@ public class AnimalHustlerApp extends GameApplication {
         settings.setHeight(20*36);
     }
 
-
     @Override
-    protected void initGame() {
-        getGameWorld().addEntityFactory(new AnimalHustlerFactory());
-        Level level = setLevelFromMap("AnimalHustlerMap.tmx");
-        player = spawn("player");
+    protected void initInput() {
+        onKeyDown(KeyCode.F, () -> {
+            getNotificationService().pushNotification("Hello world");
+        });
 
     }
 
     @Override
-    protected void initInput() {
-        onKeyDown(KeyCode.F, () -> {
-            getNotificationService().pushNotification("Hi");
-        });
-        Input input = getInput();
-
-        input.addAction(new UserAction("Move Right") {
-            @Override
-            protected void onAction() {
-                player.translate(5,0);
-            }
-        }, KeyCode.D);
-        input.addAction(new UserAction("Move Left") {
-            @Override
-            protected void onAction() {
-                player.translate(-5,0);
-            }
-        }, KeyCode.A);
-        input.addAction(new UserAction("Move Up") {
-            @Override
-            protected void onAction() {
-                player.translate(0,-5);
-            }
-        }, KeyCode.W);
-        input.addAction(new UserAction("Move Down") {
-            @Override
-            protected void onAction() {
-                player.translate(0,5);
-            }
-        }, KeyCode.S);
-
+    protected void initGame() {
+        getGameWorld().addEntityFactory(new AnimalHustlerFactory());
+        player = spawn("player");
+        Level level = setLevelFromMap("AnimalHustlerMap.tmx");
     }
 
     public static void main(String[] args) {
