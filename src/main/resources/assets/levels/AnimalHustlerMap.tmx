@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="25" height="20" tilewidth="36" tileheight="36" infinite="0" nextlayerid="11" nextobjectid="1">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="25" height="20" tilewidth="36" tileheight="36" infinite="0" nextlayerid="11" nextobjectid="95">
  <tileset firstgid="1" name="MapAssets" tilewidth="36" tileheight="36" tilecount="1024" columns="32">
   <image source="MapAssets.png" width="1152" height="1152"/>
  </tileset>
@@ -34,39 +34,80 @@
 </data>
  </layer>
  <objectgroup id="11" name="Walls">
-  <object id="64" type="wall" x="504" y="252">
-   <polygon points="0,0 0,-36 -36,-36 -72,0 -108,-36 -144,-72 -180,-72 -216,-72 -252,-108 -252,-72 -216,-36 -180,-36 -144,-36 -72,36 -36,0"/>
-  </object>
-  <object id="66" type="wall" x="612" y="720">
-   <polyline points="0,0 36,-36 72,-36 108,-36 144,-72 180,-72 216,-72 252,-108 288,-108 288,0 0,0 36,-36"/>
-  </object>
-  <object id="73" type="wall" x="612" y="0">
-   <polygon points="0,0 0,36 36,72 72,36 72,72 108,108 144,72 180,108 180,180 288,288 288,0"/>
-  </object>
-  <object id="74" type="wall" x="360" y="36">
-   <polygon points="252,0 0,0 -36,72 -72,108 -108,108 -252,108 -252,144 -288,180 -360,180 -360,-36 -36,-36 252,-36"/>
-  </object>
-  <object id="78" type="wall" x="576" y="252">
-   <polygon points="0,0 36,-36 180,-36 216,-72 216,-108 180,-72 36,-72 0,-36"/>
-  </object>
-  <object id="82" type="wall" x="108" y="180">
-   <polygon points="0,0 0,108 36,108 72,72 108,108 144,108 144,-36 0,-36"/>
-  </object>
-  <object id="83" type="wall" x="36" y="360">
-   <polygon points="0,0 0,-108 -36,-108 -36,0"/>
-  </object>
-  <object id="84" type="wall" x="180" y="288">
-   <polygon points="0,0 0,36 108,36 108,0"/>
-  </object>
-  <object id="86" type="wall" x="144" y="288">
-   <polygon points="0,0 -36,36 -108,36 -108,0 -36,0"/>
-  </object>
-  <object id="88" type="wall" x="180" y="540">
-   <polygon points="0,0 0,36 72,36 108,36 108,144 -144,144 -144,36 -36,36 -36,0 -180,0 -180,180 144,180 144,0"/>
-  </object>
   <object id="92" type="wall" x="324" y="720" width="288"/>
-  <object id="95" type="wall" x="900" y="288" height="324"/>
   <object id="100" type="wall" x="0" y="216" height="324"/>
+  <object id="8" type="wall" x="612" y="684" height="36"/>
+  <object id="13" type="wall" x="612" y="684" width="108"/>
+  <object id="14" type="wall" x="720" y="648" height="36"/>
+  <object id="15" type="wall" x="720" y="648" width="108"/>
+  <object id="16" type="wall" x="828" y="612" height="36"/>
+  <object id="17" type="wall" x="828" y="612" width="72"/>
+  <object id="18" type="wall" x="900" y="288" height="324"/>
+  <object id="25" type="wall" x="900" y="252" height="36"/>
+  <object id="28" type="wall" x="864" y="252" width="36"/>
+  <object id="29" type="wall" x="864" y="216" height="36"/>
+  <object id="30" type="wall" x="828" y="216" width="36"/>
+  <object id="31" type="wall" x="828" y="180" height="36"/>
+  <object id="32" type="wall" x="756" y="180" width="72"/>
+  <object id="33" type="wall" x="756" y="180" height="36"/>
+  <object id="34" type="wall" x="612" y="216" width="144"/>
+  <object id="35" type="wall" x="612" y="216" height="36"/>
+  <object id="36" type="wall" x="576" y="252" width="36"/>
+  <object id="37" type="wall" x="576" y="180" height="72"/>
+  <object id="38" type="wall" x="576" y="180" width="36"/>
+  <object id="39" type="wall" x="612" y="180" width="144"/>
+  <object id="40" type="wall" x="756" y="144" height="36"/>
+  <object id="41" type="wall" x="756" y="144" width="36"/>
+  <object id="42" type="wall" x="792" y="108" height="36"/>
+  <object id="43" type="wall" x="684" y="108" width="108"/>
+  <object id="44" type="wall" x="684" y="72" height="36"/>
+  <object id="45" type="wall" x="612" y="72" width="72"/>
+  <object id="46" type="wall" x="612" y="36" height="36"/>
+  <object id="47" type="wall" x="360" y="36" width="252"/>
+  <object id="48" type="wall" x="360" y="36" height="72"/>
+  <object id="49" type="wall" x="324" y="108" width="36"/>
+  <object id="50" type="wall" x="324" y="108" height="36"/>
+  <object id="51" type="wall" x="324" y="144" height="36"/>
+  <object id="52" type="wall" x="324" y="180" width="72"/>
+  <object id="53" type="wall" x="396" y="180" height="36"/>
+  <object id="54" type="wall" x="396" y="216" width="72"/>
+  <object id="55" type="wall" x="468" y="216" width="36"/>
+  <object id="56" type="wall" x="504" y="180" height="36"/>
+  <object id="57" type="wall" x="504" y="216" height="36"/>
+  <object id="58" type="wall" x="468" y="252" width="36"/>
+  <object id="59" type="wall" x="468" y="252" height="36"/>
+  <object id="60" type="wall" x="432" y="288" width="36"/>
+  <object id="61" type="wall" x="396" y="288" width="36"/>
+  <object id="62" type="wall" x="396" y="252" height="36"/>
+  <object id="63" type="wall" x="360" y="252" width="36"/>
+  <object id="64" type="wall" x="360" y="216" height="36"/>
+  <object id="65" type="wall" x="324" y="216" width="36"/>
+  <object id="66" type="wall" x="252" y="216" width="72"/>
+  <object id="67" type="wall" x="252" y="216" height="72"/>
+  <object id="68" type="wall" x="252" y="288" width="36"/>
+  <object id="69" type="wall" x="288" y="288" height="36"/>
+  <object id="73" type="wall" x="216" y="324" width="72"/>
+  <object id="74" type="wall" x="216" y="288" height="36"/>
+  <object id="75" type="wall" x="144" y="288" height="36"/>
+  <object id="76" type="wall" x="36" y="324" width="108"/>
+  <object id="77" type="wall" x="36" y="324" height="72"/>
+  <object id="78" type="wall" x="0" y="396" width="36"/>
+  <object id="79" type="wall" x="144" y="288" width="72"/>
+  <object id="80" type="wall" x="0" y="540" width="144"/>
+  <object id="81" type="wall" x="144" y="540" height="36"/>
+  <object id="82" type="wall" x="72" y="576" width="72"/>
+  <object id="83" type="wall" x="180" y="540" height="36"/>
+  <object id="84" type="wall" x="180" y="540" width="144"/>
+  <object id="85" type="wall" x="324" y="540" height="180"/>
+  <object id="86" type="wall" x="72" y="684" width="180"/>
+  <object id="87" type="wall" x="72" y="576" height="108"/>
+  <object id="88" type="wall" x="252" y="576" height="108"/>
+  <object id="89" type="wall" x="180" y="576" width="72"/>
+  <object id="90" type="wall" x="0" y="0" height="216"/>
+  <object id="91" type="wall" x="0" y="0" width="900"/>
+  <object id="92" type="wall" x="900" y="0" height="720"/>
+  <object id="93" type="wall" x="0" y="720" width="900"/>
+  <object id="94" type="wall" x="0" y="540" height="180"/>
  </objectgroup>
  <layer id="2" name="Grass Blades" width="25" height="20">
   <data encoding="csv">
