@@ -1,12 +1,17 @@
 package ca.bcit.comp2522.termproject.christiebelal;
 
+import ca.bcit.comp2522.termproject.christiebelal.components.PlayerComponent;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.entity.Entity;
+import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.entity.level.Level;
 import com.almasb.fxgl.input.Input;
 import com.almasb.fxgl.input.UserAction;
+import com.almasb.fxgl.input.virtual.VirtualButton;
+import com.almasb.fxgl.physics.HitBox;
 import com.almasb.fxgl.time.Timer;
+import javafx.geometry.BoundingBox;
 import javafx.scene.input.KeyCode;
 
 
@@ -20,10 +25,7 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 public class AnimalHustlerApp extends GameApplication {
 
     private Entity player;
-
-    public final Timer getMasterTimer() {
-        return getMasterTimer();
-    }
+    private Component playerComponent;
 
     @Override
     protected void initSettings(GameSettings settings) {
@@ -42,7 +44,7 @@ public class AnimalHustlerApp extends GameApplication {
         input.addAction(new UserAction("Move Right") {
             @Override
             protected void onAction() {
-                player.translate(5, 0);
+                    player.translate(5, 0);
             }
         }, KeyCode.D);
 
@@ -57,6 +59,7 @@ public class AnimalHustlerApp extends GameApplication {
             @Override
             protected void onAction() {
                 player.translate(0, -5);
+                System.out.println(getGameWorld().getEntitiesByType(WALL));
             }
         }, KeyCode.W);
 
@@ -71,9 +74,9 @@ public class AnimalHustlerApp extends GameApplication {
     @Override
     protected void initGame() {
         getGameWorld().addEntityFactory(new AnimalHustlerFactory());
-
         Level level = setLevelFromMap("AnimalHustlerMap.tmx");
         player = spawn("player", 450, 450);
+        playerComponent = player.getComponent(PlayerComponent.class);
     }
 
     public static void main(String[] args) {
