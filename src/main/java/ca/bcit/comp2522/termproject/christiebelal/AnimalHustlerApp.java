@@ -3,6 +3,7 @@ package ca.bcit.comp2522.termproject.christiebelal;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.entity.level.Level;
+import com.almasb.fxgl.time.Timer;
 import javafx.scene.input.KeyCode;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
@@ -12,9 +13,13 @@ import static com.almasb.fxgl.dsl.FXGL.*;
  */
 public class AnimalHustlerApp extends GameApplication {
 
+    public final Timer getMasterTimer() {
+        return getMasterTimer();
+    }
     @Override
     protected void initSettings(GameSettings settings) {
-
+        settings.setWidth(25*36);
+        settings.setHeight(20*36);
     }
 
     @Override
@@ -27,7 +32,8 @@ public class AnimalHustlerApp extends GameApplication {
     @Override
     protected void initGame() {
         getGameWorld().addEntityFactory(new AnimalHustlerFactory());
-        Level level = setLevelFromMap("AnimalHustlerPrototype.tmx");
+        spawn("player");
+//        Level level = setLevelFromMap("AnimalHustlerPrototype.tmx");
     }
 
     public static void main(String[] args) {
