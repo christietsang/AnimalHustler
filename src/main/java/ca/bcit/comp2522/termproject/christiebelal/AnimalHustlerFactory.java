@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import static com.almasb.fxgl.dsl.FXGLForKtKt.entityBuilder;
+import static com.almasb.fxgl.dsl.FXGLForKtKt.onKeyDown;
 
 /**
  * @author Almas Baimagambetov (almaslvl@gmail.com)
@@ -21,12 +22,9 @@ public class AnimalHustlerFactory implements EntityFactory {
 
     @Spawns("player")
     public Entity newPlayer(SpawnData data) {
-        PhysicsComponent physics = new PhysicsComponent();
-        physics.setBodyType(BodyType.DYNAMIC);
 
         return entityBuilder(data)
                 .viewWithBBox(new Rectangle(12, 12, Color.BLACK))
-                .with(physics)
                 .build();
     }
 }
