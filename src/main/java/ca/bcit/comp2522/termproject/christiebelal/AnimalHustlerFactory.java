@@ -29,6 +29,9 @@ public class AnimalHustlerFactory implements EntityFactory {
 
     @Spawns("player")
     public Entity newPlayer(SpawnData data) {
+
+        PhysicsComponent physics = new PhysicsComponent();
+        physics.setBodyType(BodyType.DYNAMIC);
         return entityBuilder(data)
                 .type(PLAYER)
                 .with(physics)
