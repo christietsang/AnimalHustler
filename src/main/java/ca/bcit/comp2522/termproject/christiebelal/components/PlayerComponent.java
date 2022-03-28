@@ -14,9 +14,13 @@ public class PlayerComponent extends Component {
 
     private PhysicsComponent physics;
 
-    private AnimatedTexture texture;
+    private AnimatedTexture textureUp;
+    private AnimatedTexture textureDown;
+    private AnimatedTexture textureLeft;
+    private AnimatedTexture textureRight;
 
-    private AnimationChannel animIdle, animWalkUp, animWalkDown, animWalkRight, animWalkLeft;
+    private AnimationChannel animIdleDown, animIdleRight, animIdleUp, animIdleLeft,
+            animWalkUp, animWalkDown, animWalkRight, animWalkLeft;
 
     public PlayerComponent() {
         Image imageDown = image("ACharDown.png");
@@ -24,30 +28,58 @@ public class PlayerComponent extends Component {
         Image imageRight = image("ACharRight.png");
         Image imageLeft = image("ACharLeft.png");
 
-        animIdle = new AnimationChannel(imageDown, 2, 72, 72, Duration.seconds(1), 0, 0);
+
+        animIdleDown = new AnimationChannel(imageDown, 2, 72, 72, Duration.seconds(1), 0, 0);
         animWalkDown = new AnimationChannel(imageDown, 2, 72, 72, Duration.seconds(0.66), 0, 3);
 
-        texture = new AnimatedTexture(animIdle);
-        texture.loop();
+        animIdleUp = new AnimationChannel(imageUp, 2, 72, 72, Duration.seconds(1), 0, 0);
+        animWalkUp = new AnimationChannel(imageUp, 2, 72, 72, Duration.seconds(0.66), 0, 3);
+
+        animIdleRight = new AnimationChannel(imageRight, 2, 72, 72, Duration.seconds(1), 0, 0);
+        animWalkRight = new AnimationChannel(imageRight, 2, 72, 72, Duration.seconds(0.66), 0, 3);
+
+        animIdleLeft = new AnimationChannel(imageLeft, 2, 72, 72, Duration.seconds(1), 0, 0);
+        animWalkLeft = new AnimationChannel(imageLeft, 2, 72, 72, Duration.seconds(0.66), 0, 3);
+
+        textureUp = new AnimatedTexture(animIdleUp);
+        textureDown = new AnimatedTexture(animIdleDown);
+        textureLeft = new AnimatedTexture(animIdleLeft);
+        textureRight = new AnimatedTexture(animIdleRight);
+        textureUp.loop();
 
     }
 
     @Override
     public void onUpdate(double tpf) {
-        if (physics.isMovingX()) {
-            if (texture.getAnimationChannel() != animWalkDown) {
-                texture.loopAnimationChannel(animWalkDown);
+        if (physics.getVelocityX() > 0 && physics.isMovingX()) {
+            if (textureRight.getAnimationChannel() != animWalkRight) {
+                textureRight.loopAnimationChannel(animWalkRight);
+            }
+        }
+        if (physics.getVelocityX() < 0 && physics.isMovingX()) {
+            if (textureLeft.getAnimationChannel() != animWalkLeft) {
+                textureLeft.loopAnimationChannel(animWalkLeft);
+            }
+        }
+        if (physics.getVelocityY() < 0 && physics.isMovingY()) {
+            if (textureUp.getAnimationChannel() != animWalkUp) {
+                textureUp.loopAnimationChannel(animWalkUp);
+            }
+        }
+        if (physics.getVelocityY() > 0 && physics.isMovingY()) {
+            if (textureDown.getAnimationChannel() != animWalkDown) {
+                textureDown.loopAnimationChannel(animWalkDown);
             }
         } else {
-            if (texture.getAnimationChannel() != animIdle) {
-                texture.loopAnimationChannel(animIdle);
+            if (textureDown.getAnimationChannel() != animIdleDown) {
+                textureDown.loopAnimationChannel(animIdleDown);
             }
         }
     }
     @Override
     public void onAdded() {
         entity.getTransformComponent().setScaleOrigin(new Point2D(0, 0));
-        entity.getViewComponent().addChild(texture);
+        entity.getViewComponent().addChild(textureDown);
     }
 
         public void left() {
