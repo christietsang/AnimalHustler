@@ -119,7 +119,7 @@ public class AnimalHustlerApp extends GameApplication {
 
             getDialogService().showBox("Today's Summary:", content, btnClose);
 
-        }, Duration.seconds(5));
+        }, Duration.seconds(30));
 
 
     }

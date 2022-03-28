@@ -1,5 +1,6 @@
 package ca.bcit.comp2522.termproject.christiebelal;
 
+import ca.bcit.comp2522.termproject.christiebelal.components.AnimalComponent;
 import ca.bcit.comp2522.termproject.christiebelal.components.PlayerComponent;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.EntityFactory;
@@ -38,6 +39,20 @@ public class AnimalHustlerFactory implements EntityFactory {
                 .bbox(new HitBox(new Point2D(22,32), BoundingShape.box(30, 30)))
                 .with(new CollidableComponent(true))
                 .with(new PlayerComponent())
+                .build();
+    }
+
+    @Spawns("cow")
+    public Entity newCow(SpawnData data) {
+
+        PhysicsComponent physics = new PhysicsComponent();
+        physics.setBodyType(BodyType.DYNAMIC);
+        return entityBuilder(data)
+                .type(COW)
+                .with(physics)
+                .bbox(new HitBox(new Point2D(22,32), BoundingShape.box(30, 30)))
+                .with(new CollidableComponent(true))
+//                .with(new AnimalComponent())
                 .build();
     }
 
