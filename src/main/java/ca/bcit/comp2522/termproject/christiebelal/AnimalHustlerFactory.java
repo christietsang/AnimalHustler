@@ -34,9 +34,9 @@ public class AnimalHustlerFactory implements EntityFactory {
         return entityBuilder(data)
                 .type(PLAYER)
                 .with(physics)
-                .with(new PlayerComponent())
+                .bbox(new HitBox(new Point2D(22,32), BoundingShape.box(30, 30)))
                 .with(new CollidableComponent(true))
-                .viewWithBBox(new Rectangle(20, 20, Color.BLACK))
+                .with(new PlayerComponent())
                 .build();
     }
 
