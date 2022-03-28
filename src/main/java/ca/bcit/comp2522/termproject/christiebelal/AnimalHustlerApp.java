@@ -8,6 +8,10 @@ import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.entity.level.Level;
 import com.almasb.fxgl.input.Input;
 import com.almasb.fxgl.input.UserAction;
+import com.almasb.fxgl.input.virtual.VirtualButton;
+import com.almasb.fxgl.physics.HitBox;
+import com.almasb.fxgl.physics.PhysicsComponent;
+import com.almasb.fxgl.time.Timer;
 import com.almasb.fxgl.time.TimerAction;
 import javafx.scene.layout.VBox;
 import javafx.scene.input.KeyCode;
@@ -34,7 +38,6 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 public class AnimalHustlerApp extends GameApplication {
 
     private Entity player;
-    private Entity summary;
     private Integer days;
     private Component playerComponent;
 
@@ -53,34 +56,53 @@ public class AnimalHustlerApp extends GameApplication {
         });
         Input input = getInput();
 
-        input.addAction(new UserAction("Move Right") {
+        getInput().addAction(new UserAction("Left") {
             @Override
             protected void onAction() {
-                player.translate(5, 0);
+                player.getComponent(PlayerComponent.class).left();
             }
-        }, KeyCode.D);
 
-        input.addAction(new UserAction("Move Left") {
             @Override
-            protected void onAction() {
-                player.translate(-5, 0);
+            protected void onActionEnd() {
+                player.getComponent(PlayerComponent.class).stop();
             }
-        }, KeyCode.A);
+        }, KeyCode.A, VirtualButton.LEFT);
 
-        input.addAction(new UserAction("Move Up") {
+        getInput().addAction(new UserAction("Right") {
             @Override
             protected void onAction() {
-                player.translate(0, -5);
-                System.out.println(getGameWorld().getEntitiesByType(WALL));
+                player.getComponent(PlayerComponent.class).right();
             }
-        }, KeyCode.W);
 
-        input.addAction(new UserAction("Move Down") {
+            @Override
+            protected void onActionEnd() {
+                player.getComponent(PlayerComponent.class).stop();
+            }
+        }, KeyCode.D, VirtualButton.RIGHT);
+
+        getInput().addAction(new UserAction("Up") {
             @Override
             protected void onAction() {
-                player.translate(0, 5);
+                player.getComponent(PlayerComponent.class).up();
             }
-        }, KeyCode.S);
+
+            @Override
+            protected void onActionEnd() {
+                player.getComponent(PlayerComponent.class).stop();
+            }
+        }, KeyCode.W, VirtualButton.UP);
+
+        getInput().addAction(new UserAction("down") {
+            @Override
+            protected void onAction() {
+                player.getComponent(PlayerComponent.class).down();
+            }
+
+            @Override
+            protected void onActionEnd() {
+                player.getComponent(PlayerComponent.class).stop();
+            }
+        }, KeyCode.S, VirtualButton.DOWN);
     }
 
     protected void initUI() {
@@ -109,13 +131,12 @@ public class AnimalHustlerApp extends GameApplication {
         Level level = setLevelFromMap("AnimalHustlerMap.tmx");
         player = spawn("player", 450, 450);
         playerComponent = player.getComponent(PlayerComponent.class);
-
-
-
     }
 
-
-
+    @Override
+    protected void initPhysics() {
+        getPhysicsWorld().setGravity(0, 0);
+    }
 
 
     public static void main(String[] args) {
