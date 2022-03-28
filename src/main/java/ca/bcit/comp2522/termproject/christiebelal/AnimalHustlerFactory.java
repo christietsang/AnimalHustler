@@ -31,14 +31,15 @@ public class AnimalHustlerFactory implements EntityFactory {
     public Entity newPlayer(SpawnData data) {
         return entityBuilder(data)
                 .type(PLAYER)
-                .with(new PlayerComponent())
+                .with(physics)
+                .bbox(new HitBox(new Point2D(22,32), BoundingShape.box(30, 30)))
                 .with(new CollidableComponent(true))
-                .viewWithBBox(new Rectangle(20, 20, Color.BLACK))
+                .with(new PlayerComponent())
                 .build();
     }
 
     @Spawns("wall")
-    public Entity newWall(SpawnData data) {
+    public Entity newWall(SpawnData data){
         return entityBuilder(data)
                 .type(WALL)
                 .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
