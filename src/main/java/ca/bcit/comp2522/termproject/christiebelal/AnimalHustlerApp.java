@@ -8,26 +8,36 @@ import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.entity.level.Level;
 import com.almasb.fxgl.input.Input;
 import com.almasb.fxgl.input.UserAction;
-import com.almasb.fxgl.input.virtual.VirtualButton;
-import com.almasb.fxgl.physics.HitBox;
-import com.almasb.fxgl.time.Timer;
 import com.almasb.fxgl.time.TimerAction;
-import javafx.geometry.BoundingBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
+import com.almasb.fxgl.app.GameApplication;
+import com.almasb.fxgl.app.GameSettings;
+import javafx.collections.FXCollections;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+
+import javafx.scene.control.Button;
+
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static ca.bcit.comp2522.termproject.christiebelal.AnimalHustlerType.*;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
-/**
- * @author Almas Baimagambetov (almaslvl@gmail.com)
- */
+
 public class AnimalHustlerApp extends GameApplication {
 
     private Entity player;
+    private Entity summary;
     private Integer days;
     private Component playerComponent;
+
 
     @Override
     protected void initSettings(GameSettings settings) {
@@ -46,7 +56,7 @@ public class AnimalHustlerApp extends GameApplication {
         input.addAction(new UserAction("Move Right") {
             @Override
             protected void onAction() {
-                    player.translate(5, 0);
+                player.translate(5, 0);
             }
         }, KeyCode.D);
 
@@ -73,19 +83,38 @@ public class AnimalHustlerApp extends GameApplication {
         }, KeyCode.S);
     }
 
+    protected void initUI() {
+        Map<String, Runnable> dialogs = new LinkedHashMap<>();
+        getGameTimer().runAtInterval(() -> {
+            VBox content = new VBox(
+                    getUIFactoryService().newText("Days left until start of school: " + days),
+                    getUIFactoryService().newText("Savings: "),
+                    getUIFactoryService().newText("Goal: ")
+            );
+
+            Button btnClose = getUIFactoryService().newButton("Continue to next day...");
+            btnClose.setPrefWidth(300);
+
+            getDialogService().showBox("Today's Summary:", content, btnClose);
+
+        }, Duration.seconds(5));
+
+
+    }
+
     @Override
     protected void initGame() {
         days = 10;
         getGameWorld().addEntityFactory(new AnimalHustlerFactory());
         Level level = setLevelFromMap("AnimalHustlerMap.tmx");
         player = spawn("player", 450, 450);
-
-        getGameTimer().runAtInterval(()-> {
-            days--;
-            getNotificationService().pushNotification("Your day is over.  You have " + days + " days until CST begins.");
-        }, Duration.seconds(120));
         playerComponent = player.getComponent(PlayerComponent.class);
+
+
+
     }
+
+
 
 
 

@@ -15,6 +15,7 @@ import javafx.geometry.BoundingBox;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+
 import static ca.bcit.comp2522.termproject.christiebelal.AnimalHustlerType.*;
 
 
@@ -36,16 +37,8 @@ public class AnimalHustlerFactory implements EntityFactory {
                 .build();
     }
 
-//    @Spawns("wall")
-//    public Entity wall(SpawnData data) {
-
-//        return entityBuilder(data)
-//                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
-//                .build();
-//    }
-
     @Spawns("wall")
-    public Entity newWall(SpawnData data){
+    public Entity newWall(SpawnData data) {
         return entityBuilder(data)
                 .type(WALL)
                 .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
@@ -53,5 +46,6 @@ public class AnimalHustlerFactory implements EntityFactory {
                 .with(new CollidableComponent(true))
                 .build();
     }
+
 
 }
