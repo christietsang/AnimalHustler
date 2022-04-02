@@ -11,16 +11,24 @@ import javafx.util.Duration;
 import static com.almasb.fxgl.dsl.FXGL.image;
 
 public class PlayerComponent extends Component {
+    private static final int FRAME_WIDTH_HEIGHT = 72;
+    private static final double ANIMATION_DURATION = 0.66;
+    private static final int ENDING_FRAME = 3;
 
     private PhysicsComponent physics;
 
-    private AnimatedTexture textureUp;
-    private AnimatedTexture textureDown;
-    private AnimatedTexture textureLeft;
-    private AnimatedTexture textureRight;
-
-    private AnimationChannel animIdleDown, animIdleRight, animIdleUp, animIdleLeft,
-            animWalkUp, animWalkDown, animWalkRight, animWalkLeft;
+    private final AnimatedTexture textureUp;
+    private final AnimatedTexture textureDown;
+    private final AnimatedTexture textureLeft;
+    private final AnimatedTexture textureRight;
+    private final AnimationChannel animIdleDown;
+    private final AnimationChannel animIdleRight;
+    private final AnimationChannel animIdleUp;
+    private final AnimationChannel animIdleLeft;
+    private final AnimationChannel animWalkUp;
+    private final AnimationChannel animWalkDown;
+    private final AnimationChannel animWalkRight;
+    private final AnimationChannel animWalkLeft;
 
     public PlayerComponent() {
         Image imageDown = image("ACharDown.png");
@@ -28,58 +36,73 @@ public class PlayerComponent extends Component {
         Image imageRight = image("ACharRight.png");
         Image imageLeft = image("ACharLeft.png");
 
+        animWalkUp = new AnimationChannel(imageUp, 2, FRAME_WIDTH_HEIGHT, FRAME_WIDTH_HEIGHT,
+                Duration.seconds(ANIMATION_DURATION), 0, ENDING_FRAME);
+        animWalkDown = new AnimationChannel(imageDown, 2, FRAME_WIDTH_HEIGHT, FRAME_WIDTH_HEIGHT,
+                Duration.seconds(ANIMATION_DURATION), 0, ENDING_FRAME);
+        animWalkLeft = new AnimationChannel(imageLeft, 2, FRAME_WIDTH_HEIGHT, FRAME_WIDTH_HEIGHT,
+                Duration.seconds(ANIMATION_DURATION), 0, ENDING_FRAME);
+        animWalkRight = new AnimationChannel(imageRight, 2, FRAME_WIDTH_HEIGHT, FRAME_WIDTH_HEIGHT,
+                Duration.seconds(ANIMATION_DURATION), 0, ENDING_FRAME);
 
-        animIdleDown = new AnimationChannel(imageDown, 2, 72, 72, Duration.seconds(1), 0, 0);
-        animWalkDown = new AnimationChannel(imageDown, 2, 72, 72, Duration.seconds(0.66), 0, 3);
-
-        animIdleUp = new AnimationChannel(imageUp, 2, 72, 72, Duration.seconds(1), 0, 0);
-        animWalkUp = new AnimationChannel(imageUp, 2, 72, 72, Duration.seconds(0.66), 0, 3);
-
-        animIdleRight = new AnimationChannel(imageRight, 2, 72, 72, Duration.seconds(1), 0, 0);
-        animWalkRight = new AnimationChannel(imageRight, 2, 72, 72, Duration.seconds(0.66), 0, 3);
-
-        animIdleLeft = new AnimationChannel(imageLeft, 2, 72, 72, Duration.seconds(1), 0, 0);
-        animWalkLeft = new AnimationChannel(imageLeft, 2, 72, 72, Duration.seconds(0.66), 0, 3);
-
+        animIdleUp = new AnimationChannel(imageUp, 2, FRAME_WIDTH_HEIGHT, FRAME_WIDTH_HEIGHT,
+                Duration.seconds(1), 0, 0);
+        animIdleDown = new AnimationChannel(imageDown, 2, FRAME_WIDTH_HEIGHT, FRAME_WIDTH_HEIGHT,
+                Duration.seconds(1), 0, 0);
+        animIdleLeft = new AnimationChannel(imageLeft, 2, FRAME_WIDTH_HEIGHT, FRAME_WIDTH_HEIGHT,
+                Duration.seconds(1), 0, 0);
+        animIdleRight = new AnimationChannel(imageRight, 2, FRAME_WIDTH_HEIGHT, FRAME_WIDTH_HEIGHT,
+                Duration.seconds(1), 0, 0);
         textureUp = new AnimatedTexture(animIdleUp);
         textureDown = new AnimatedTexture(animIdleDown);
         textureLeft = new AnimatedTexture(animIdleLeft);
         textureRight = new AnimatedTexture(animIdleRight);
-        textureUp.loop();
 
     }
 
     @Override
-    public void onUpdate(double tpf) {
+    public void onUpdate(final double tpf) {
         if (physics.getVelocityX() > 0 && physics.isMovingX()) {
-            if (textureRight.getAnimationChannel() != animWalkRight) {
-                textureRight.loopAnimationChannel(animWalkRight);
-            }
+            texturesRight(textureRight, textureLeft, animWalkRight);
         }
         if (physics.getVelocityX() < 0 && physics.isMovingX()) {
-            if (textureLeft.getAnimationChannel() != animWalkLeft) {
-                textureLeft.loopAnimationChannel(animWalkLeft);
-            }
+            texturesRight(textureLeft, textureRight, animWalkLeft);
         }
         if (physics.getVelocityY() < 0 && physics.isMovingY()) {
-            if (textureUp.getAnimationChannel() != animWalkUp) {
-                textureUp.loopAnimationChannel(animWalkUp);
-            }
+            texturesUp(textureUp, textureLeft, textureRight, animWalkUp);
         }
         if (physics.getVelocityY() > 0 && physics.isMovingY()) {
-            if (textureDown.getAnimationChannel() != animWalkDown) {
-                textureDown.loopAnimationChannel(animWalkDown);
-            }
-        } else {
-            if (textureDown.getAnimationChannel() != animIdleDown) {
-                textureDown.loopAnimationChannel(animIdleDown);
-            }
+            texturesDown(textureDown, textureUp, textureLeft, textureRight, animWalkDown);
         }
     }
+
+    private void texturesDown(final AnimatedTexture localTextureDown, final AnimatedTexture localTextureUp,
+                              final AnimatedTexture localTextureLeft, final AnimatedTexture localTextureRight,
+                              final AnimationChannel localAnimWalkDown) {
+        if (!entity.getViewComponent().getChildren().contains(localTextureDown)) {
+            entity.getViewComponent().removeChild(localTextureUp);
+            entity.getViewComponent().removeChild(localTextureLeft);
+            entity.getViewComponent().removeChild(localTextureRight);
+            entity.getViewComponent().addChild(localTextureDown);
+        }
+        if (localTextureDown.getAnimationChannel() != localAnimWalkDown) {
+            localTextureDown.loopAnimationChannel(localAnimWalkDown);
+        }
+    }
+
+    private void texturesUp(final AnimatedTexture localTextureUp, final AnimatedTexture localTextureLeft, final AnimatedTexture localTextureRight, final AnimationChannel localAnimWalkUp) {
+        texturesDown(localTextureUp, textureDown, localTextureLeft, localTextureRight, localAnimWalkUp);
+    }
+
+    private void texturesRight(final AnimatedTexture localTextureRight, final AnimatedTexture localTextureLeft, final AnimationChannel localAnimWalkRight) {
+        texturesUp(localTextureRight, textureUp, localTextureLeft, localAnimWalkRight);
+    }
+
     @Override
     public void onAdded() {
         entity.getTransformComponent().setScaleOrigin(new Point2D(0, 0));
         entity.getViewComponent().addChild(textureDown);
+
     }
 
         public void left() {
@@ -105,5 +128,9 @@ public class PlayerComponent extends Component {
     public void stop() {
         physics.setVelocityX(0);
         physics.setVelocityY(0);
+        textureDown.loopAnimationChannel(animIdleDown);
+        textureUp.loopAnimationChannel(animIdleUp);
+        textureLeft.loopAnimationChannel(animIdleLeft);
+        textureRight.loopAnimationChannel(animIdleRight);
     }
 }
