@@ -1,6 +1,8 @@
 package ca.bcit.comp2522.termproject.christiebelal;
 
 import ca.bcit.comp2522.termproject.christiebelal.components.PlayerComponent;
+import ca.bcit.comp2522.termproject.christiebelal.ui.CountdownIcon;
+import ca.bcit.comp2522.termproject.christiebelal.ui.CurrencyIcon;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.entity.Entity;
@@ -19,6 +21,7 @@ public class AnimalHustlerApp extends GameApplication {
     private Entity player;
     private Integer days;
     private Component playerComponent;
+    private CountdownIcon countdownIcon;
 
 
     @Override
@@ -98,11 +101,23 @@ public class AnimalHustlerApp extends GameApplication {
 
     @Override
     protected void initGame() {
+        initVarListeners();
         days = 10;
         getGameWorld().addEntityFactory(new AnimalHustlerFactory());
         setLevelFromMap("AnimalHustlerMap.tmx");
         player = spawn("player", 450, 450);
         playerComponent = player.getComponent(PlayerComponent.class);
+        countdownIcon = new CountdownIcon();
+        loadCurrentLevel();
+
+    }
+
+    private void initVarListeners(){
+        getWorldProperties().<Integer>addListener(MONEY, (old, newValue) -> {
+            if (newValue > MAX_MONEY){
+                set(MONEY, MAX_MONEY);
+            }
+        });
     }
 
     @Override
@@ -110,6 +125,11 @@ public class AnimalHustlerApp extends GameApplication {
         getPhysicsWorld().setGravity(0, 0);
     }
 
+    // TODO: Reset timer when the current level ends
+    private void loadCurrentLevel(){
+        set(CURRENT_LEVEL, 0);
+        countdownIcon.setCountdown(60, days);
+    }
 
     public static void main(String[] args) {
         launch(args);
