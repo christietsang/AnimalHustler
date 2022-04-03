@@ -1,5 +1,6 @@
 package ca.bcit.comp2522.termproject.christiebelal.components;
 
+import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.texture.AnimatedTexture;
 import com.almasb.fxgl.texture.AnimationChannel;
@@ -8,22 +9,27 @@ import javafx.util.Duration;
 
 import static com.almasb.fxgl.dsl.FXGLForKtKt.image;
 
-public class AnimalComponent {
+public class AnimalComponent extends Component {
 
     private PhysicsComponent physics;
 
-    private AnimatedTexture texture;
+    private final AnimatedTexture texture;
 
-    private AnimationChannel animIdle;
+    private final AnimationChannel animIdle;
 
-    public AnimalComponent(){
-
-        Image animIdle = image("brownCowIdle.png");
-
-
-        this.animIdle = new AnimationChannel(animIdle, 4, 17, 17,Duration.seconds(1), 0, 0);
-
+    public AnimalComponent() {
+        Image idleImage = image("brownCowIdle.png");
+        animIdle = new AnimationChannel(idleImage, 4, 75, 55, Duration.seconds(2), 0, 1);
+        texture = new AnimatedTexture(animIdle);
+        texture.loopAnimationChannel(animIdle);
     }
 
-
+    public void onAdded() {
+        entity.getViewComponent().addChild(texture);
+    }
 }
+
+
+
+
+
