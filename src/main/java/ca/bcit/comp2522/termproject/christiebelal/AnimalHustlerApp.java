@@ -5,6 +5,7 @@ import ca.bcit.comp2522.termproject.christiebelal.ui.CountdownIcon;
 import ca.bcit.comp2522.termproject.christiebelal.ui.CurrencyIcon;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
+import com.almasb.fxgl.core.math.FXGLMath;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.input.UserAction;
@@ -12,6 +13,7 @@ import com.almasb.fxgl.input.virtual.VirtualButton;
 import com.almasb.fxgl.physics.CollisionHandler;
 import com.almasb.fxgl.physics.PhysicsWorld;
 import javafx.scene.input.KeyCode;
+
 import java.util.Map;
 
 import static ca.bcit.comp2522.termproject.christiebelal.Variables.Variables.*;
@@ -36,7 +38,7 @@ public class AnimalHustlerApp extends GameApplication {
         settings.setSceneFactory(new MySceneFactory());
     }
 
-    protected void initGameVars(final Map<String, Object> vars){
+    protected void initGameVars(final Map<String, Object> vars) {
         vars.put(MONEY, 0);
         vars.put(CURRENT_LEVEL, 0);
     }
@@ -115,18 +117,19 @@ public class AnimalHustlerApp extends GameApplication {
         getGameWorld().addEntityFactory(new AnimalHustlerFactory());
         setLevelFromMap("AnimalHustlerMap.tmx");
         player = spawn("player", 450, 450);
-        cow = spawn("cow", 400, 400);
+        cow = spawn("cow",
+                FXGLMath.random(0, getAppWidth() - 10),
+                FXGLMath.random(0, getAppHeight() - 10));
         playerComponent = player.getComponent(PlayerComponent.class);
         countdownIcon = new CountdownIcon();
         loadCurrentLevel();
 
 
-
     }
 
-    private void initVarListeners(){
+    private void initVarListeners() {
         getWorldProperties().<Integer>addListener(MONEY, (old, newValue) -> {
-            if (newValue > MAX_MONEY){
+            if (newValue > MAX_MONEY) {
                 set(MONEY, MAX_MONEY);
             }
         });
@@ -143,14 +146,20 @@ public class AnimalHustlerApp extends GameApplication {
             }
         });
 
-
-
+        physicsWorld.addCollisionHandler(new CollisionHandler(AnimalHustlerType.WALL, AnimalHustlerType.COW) {
+            protected void onCollisionBegin(Entity wall, Entity cow) {
+                cow.removeFromWorld();
+                spawn("cow",
+                        FXGLMath.random(0, getAppWidth() - 10),
+                        FXGLMath.random(0, getAppHeight() - 10));
+            }
+        });
 
 
     }
 
     // TODO: Reset timer when the current level ends
-    private void loadCurrentLevel(){
+    private void loadCurrentLevel() {
         set(CURRENT_LEVEL, geti(CURRENT_LEVEL));
         countdownIcon.setCountdown(60, days);
     }
