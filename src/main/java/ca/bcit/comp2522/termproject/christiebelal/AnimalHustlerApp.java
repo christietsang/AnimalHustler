@@ -12,7 +12,10 @@ import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.input.virtual.VirtualButton;
 import com.almasb.fxgl.physics.CollisionHandler;
 import com.almasb.fxgl.physics.PhysicsWorld;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import java.util.Map;
 
@@ -27,7 +30,6 @@ public class AnimalHustlerApp extends GameApplication {
     private Integer days;
     private Component playerComponent;
     private CountdownIcon countdownIcon;
-    private int spawnTimer;
 
 
     @Override
@@ -73,7 +75,6 @@ public class AnimalHustlerApp extends GameApplication {
 
             }
         }, KeyCode.D, VirtualButton.RIGHT);
-
         getInput().addAction(new UserAction("Up") {
             @Override
             protected void onAction() {
@@ -113,17 +114,28 @@ public class AnimalHustlerApp extends GameApplication {
     protected void initGame() {
         initVarListeners();
         days = 10;
-        spawnTimer = 5;
         getGameWorld().addEntityFactory(new AnimalHustlerFactory());
         setLevelFromMap("AnimalHustlerMap.tmx");
         player = spawn("player", 450, 450);
-        cow = spawn("cow",
+        Entity cow = spawn("cow",
                 FXGLMath.random(0, getAppWidth() - 10),
                 FXGLMath.random(0, getAppHeight() - 10));
+        spawnCowTimer();
         playerComponent = player.getComponent(PlayerComponent.class);
+
         countdownIcon = new CountdownIcon();
         loadCurrentLevel();
+    }
 
+    private void spawnCowTimer() {
+            getGameTimer().runOnceAfter(() -> {
+                Entity cow = spawn("cow",
+                        FXGLMath.random(0, getAppWidth() - 10),
+                        FXGLMath.random(0, getAppHeight() - 10));
+//                System.out.println(SPAWN_TIMER);
+//                inc(SPAWN_TIMER, -1);
+                spawnCowTimer();
+            }, Duration.seconds(SPAWN_TIMER));
 
     }
 
@@ -143,6 +155,9 @@ public class AnimalHustlerApp extends GameApplication {
         physicsWorld.addCollisionHandler(new CollisionHandler(AnimalHustlerType.COW, AnimalHustlerType.PLAYER) {
             protected void onCollisionBegin(Entity cow, Entity player) {
                 cow.removeFromWorld();
+                if (SPAWN_TIMER > 1) {
+                    SPAWN_TIMER -= 1;
+                }
             }
         });
 
@@ -160,7 +175,7 @@ public class AnimalHustlerApp extends GameApplication {
 
     // TODO: Reset timer when the current level ends
     private void loadCurrentLevel() {
-        set(CURRENT_LEVEL, geti(CURRENT_LEVEL));
+        set(CURRENT_LEVEL, geti(CURRENT_LEVEL) + 1);
         countdownIcon.setCountdown(60, days);
     }
 
