@@ -11,17 +11,16 @@ import com.almasb.fxgl.physics.BoundingShape;
 import com.almasb.fxgl.physics.HitBox;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.physics.box2d.dynamics.BodyType;
-import com.almasb.fxgl.physics.box2d.dynamics.FixtureDef;
-import javafx.geometry.BoundingBox;
 import javafx.geometry.Point2D;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.paint.Color;
+
+import java.awt.*;
 
 import static ca.bcit.comp2522.termproject.christiebelal.AnimalHustlerType.*;
 
 
 import static com.almasb.fxgl.dsl.FXGLForKtKt.entityBuilder;
-import static com.almasb.fxgl.dsl.FXGLForKtKt.onKeyDown;
 
 /**
  * @author Almas Baimagambetov (almaslvl@gmail.com)
@@ -50,9 +49,9 @@ public class AnimalHustlerFactory implements EntityFactory {
         return entityBuilder(data)
                 .type(COW)
                 .with(physics)
-                .bbox(new HitBox(new Point2D(22,32), BoundingShape.box(30, 30)))
+                .bbox(new HitBox(new Point2D(76,51), BoundingShape.box(76, 51)))
                 .with(new CollidableComponent(true))
-//                .with(new AnimalComponent())
+                .with(new AnimalComponent())
                 .build();
     }
 

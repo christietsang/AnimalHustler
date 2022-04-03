@@ -28,6 +28,7 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 public class AnimalHustlerApp extends GameApplication {
 
     private Entity player;
+    private Entity cow;
     private Integer days;
     private Component playerComponent;
     private CountdownIcon countdownIcon;
@@ -111,6 +112,7 @@ public class AnimalHustlerApp extends GameApplication {
         getGameWorld().addEntityFactory(new AnimalHustlerFactory());
         setLevelFromMap("AnimalHustlerMap.tmx");
         player = spawn("player", 450, 450);
+        cow = spawn("cow", 100, 100);
         playerComponent = player.getComponent(PlayerComponent.class);
         countdownIcon = new CountdownIcon();
         loadCurrentLevel();
