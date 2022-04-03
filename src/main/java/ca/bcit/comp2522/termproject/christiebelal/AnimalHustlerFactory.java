@@ -50,7 +50,7 @@ public class AnimalHustlerFactory implements EntityFactory {
         return entityBuilder(data)
                 .type(COW)
                 .with(physics)
-                .bbox(new HitBox(new Point2D(0,0), BoundingShape.box(76, 51)))
+                .bbox(new HitBox(new Point2D(-5,5), BoundingShape.box(76, 51)))
                 .with(new CollidableComponent(true))
                 .with(new AnimalComponent())
                 .build();
