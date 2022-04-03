@@ -3,29 +3,24 @@ package ca.bcit.comp2522.termproject.christiebelal;
 import com.almasb.fxgl.app.scene.FXGLMenu;
 import com.almasb.fxgl.app.scene.MenuType;
 import com.almasb.fxgl.dsl.FXGL;
-import com.almasb.fxgl.ui.UI;
 import javafx.beans.binding.StringBinding;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
 import javafx.scene.text.Text;
 
-import java.awt.*;
-import java.io.IOException;
-
-import static com.almasb.fxgl.dsl.FXGL.*;
+import java.sql.SQLException;
 
 public class MainMenu extends FXGLMenu {
     private TextField username;
     private TextField password;
+    private TextField badLogin;
+
     public MainMenu(MenuType type) {
         super(MenuType.MAIN_MENU);
         username = new TextField();
@@ -49,14 +44,32 @@ public class MainMenu extends FXGLMenu {
         loginButton.setTranslateX(490);
         loginButton.setTranslateY(560);
 
+        Text badLogin = new Text("Account not found");
+        badLogin.resize(142, 80);
+        badLogin.setFont(Font.font("Lucida Sans Unicode", FontPosture.REGULAR, 20));
+        badLogin.setTranslateX(380);
+        badLogin.setTranslateY(520);
 
+        // Login button
         loginButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 String usernameString = username.getText();
                 String passwordString = password.getText();
-                System.out.printf("Username: %s\nPassword: %s", usernameString, passwordString);
-                fireNewGame();
+                removeChild(badLogin);
+//                System.out.printf("Username: %s\nPassword: %s", usernameString, passwordString);
+                try {
+                    if (
+                            DatabaseHandler.checkUserNamePassword(usernameString, passwordString)) {
+                        fireNewGame();
+                    } else {
+                        addChild(badLogin);
+                    }
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
         addChild(loginButton);
@@ -67,17 +80,31 @@ public class MainMenu extends FXGLMenu {
         createButton.setTranslateY(560);
 
 
+        // Create account button
         createButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 String usernameString = username.getText();
                 String passwordString = password.getText();
-                System.out.printf("Username: %s\nPassword: %s", usernameString, passwordString);
-                fireNewGame();
+                removeChild(badLogin);
+//                System.out.printf("Username: %s\nPassword: %s", usernameString, passwordString);
+                try {
+                    if (
+                            DatabaseHandler.CreateUserName(usernameString, passwordString)) {
+                        fireNewGame();
+                    } else {
+                        addChild(badLogin);
+                    }
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
         addChild(createButton);
     }
+
     @Override
     protected Button createActionButton(StringBinding stringBinding, Runnable runnable) {
         return null;
