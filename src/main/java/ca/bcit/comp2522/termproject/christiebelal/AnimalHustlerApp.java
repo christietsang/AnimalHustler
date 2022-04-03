@@ -5,10 +5,19 @@ import ca.bcit.comp2522.termproject.christiebelal.ui.CountdownIcon;
 import ca.bcit.comp2522.termproject.christiebelal.ui.CurrencyIcon;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
+import com.almasb.fxgl.app.scene.FXGLMenu;
+import com.almasb.fxgl.app.scene.LoadingScene;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.input.virtual.VirtualButton;
+import com.almasb.fxgl.physics.HitBox;
+import com.almasb.fxgl.physics.PhysicsComponent;
+import com.almasb.fxgl.time.Timer;
+import com.almasb.fxgl.time.TimerAction;
+import com.almasb.fxgl.ui.UI;
+import com.almasb.fxgl.ui.UIController;
+import javafx.scene.layout.VBox;
 import javafx.scene.input.KeyCode;
 import java.util.Map;
 
@@ -26,8 +35,10 @@ public class AnimalHustlerApp extends GameApplication {
 
     @Override
     protected void initSettings(GameSettings settings) {
-        settings.setWidth(25 * 36);
-        settings.setHeight(20 * 36);
+        settings.setWidth(900);
+        settings.setHeight(720);
+        settings.setMainMenuEnabled(true);
+        settings.setSceneFactory(new MySceneFactory());
     }
 
     protected void initGameVars(final Map<String, Object> vars){
