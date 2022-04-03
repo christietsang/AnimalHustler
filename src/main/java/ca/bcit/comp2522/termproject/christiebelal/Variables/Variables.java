@@ -5,4 +5,5 @@ public class Variables {
     public static final String MONEY = "money";
     public static final int MAX_MONEY = 500;
     public static final String CURRENT_LEVEL = "currentlevel";
+    public static int SPAWN_TIMER = 5;
 }

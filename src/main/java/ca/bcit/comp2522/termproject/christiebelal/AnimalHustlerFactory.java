@@ -22,6 +22,7 @@ import static ca.bcit.comp2522.termproject.christiebelal.AnimalHustlerType.*;
 
 
 import static com.almasb.fxgl.dsl.FXGLForKtKt.entityBuilder;
+import static com.almasb.fxgl.dsl.FXGLForKtKt.getGameTimer;
 
 /**
  * @author Almas Baimagambetov (almaslvl@gmail.com)
@@ -44,7 +45,6 @@ public class AnimalHustlerFactory implements EntityFactory {
 
     @Spawns("cow")
     public Entity newCow(SpawnData data) {
-
         PhysicsComponent physics = new PhysicsComponent();
         physics.setBodyType(BodyType.DYNAMIC);
         return entityBuilder(data)
