@@ -1,14 +1,14 @@
 package ca.bcit.comp2522.termproject.christiebelal;
 
 import ca.bcit.comp2522.termproject.christiebelal.components.PlayerComponent;
+import ca.bcit.comp2522.termproject.christiebelal.ui.CountdownIcon;
+import ca.bcit.comp2522.termproject.christiebelal.ui.CurrencyIcon;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.app.scene.FXGLMenu;
 import com.almasb.fxgl.app.scene.LoadingScene;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.component.Component;
-import com.almasb.fxgl.entity.level.Level;
-import com.almasb.fxgl.input.Input;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.input.virtual.VirtualButton;
 import com.almasb.fxgl.physics.HitBox;
@@ -19,23 +19,9 @@ import com.almasb.fxgl.ui.UI;
 import com.almasb.fxgl.ui.UIController;
 import javafx.scene.layout.VBox;
 import javafx.scene.input.KeyCode;
-import javafx.util.Duration;
-import com.almasb.fxgl.app.GameApplication;
-import com.almasb.fxgl.app.GameSettings;
-import javafx.collections.FXCollections;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-
-import javafx.scene.control.Button;
-
-
-import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static ca.bcit.comp2522.termproject.christiebelal.AnimalHustlerType.*;
-
+import static ca.bcit.comp2522.termproject.christiebelal.Variables.Variables.*;
 import static com.almasb.fxgl.dsl.FXGL.*;
 
 
@@ -44,6 +30,7 @@ public class AnimalHustlerApp extends GameApplication {
     private Entity player;
     private Integer days;
     private Component playerComponent;
+    private CountdownIcon countdownIcon;
 
 
     @Override
@@ -54,14 +41,14 @@ public class AnimalHustlerApp extends GameApplication {
         settings.setSceneFactory(new MySceneFactory());
     }
 
+    protected void initGameVars(final Map<String, Object> vars){
+        vars.put(MONEY, 0);
+        vars.put(CURRENT_LEVEL, 0);
+    }
+
+    // TODO: Is it possible to refactor this into a separate class?
     @Override
     protected void initInput() {
-        onKeyDown(KeyCode.F, () -> {
-            getNotificationService().pushNotification("Hello world");
-            getNotificationService().pushNotification("Hi");
-        });
-        Input input = getInput();
-
         getInput().addAction(new UserAction("Left") {
             @Override
             protected void onAction() {
@@ -112,31 +99,30 @@ public class AnimalHustlerApp extends GameApplication {
     }
 
     protected void initUI() {
-        Map<String, Runnable> dialogs = new LinkedHashMap<>();
-        getGameTimer().runAtInterval(() -> {
-            VBox content = new VBox(
-                    getUIFactoryService().newText("Days left until start of school: " + days),
-                    getUIFactoryService().newText("Savings: "),
-                    getUIFactoryService().newText("Goal: ")
-            );
-
-            Button btnClose = getUIFactoryService().newButton("Continue to next day...");
-            btnClose.setPrefWidth(300);
-
-            getDialogService().showBox("Today's Summary:", content, btnClose);
-
-        }, Duration.seconds(30));
-
+        addUINode(new CurrencyIcon(), 10, 10);
+        addUINode(countdownIcon, 10, 90);
 
     }
 
     @Override
     protected void initGame() {
+        initVarListeners();
         days = 10;
         getGameWorld().addEntityFactory(new AnimalHustlerFactory());
-        Level level = setLevelFromMap("AnimalHustlerMap.tmx");
+        setLevelFromMap("AnimalHustlerMap.tmx");
         player = spawn("player", 450, 450);
         playerComponent = player.getComponent(PlayerComponent.class);
+        countdownIcon = new CountdownIcon();
+        loadCurrentLevel();
+
+    }
+
+    private void initVarListeners(){
+        getWorldProperties().<Integer>addListener(MONEY, (old, newValue) -> {
+            if (newValue > MAX_MONEY){
+                set(MONEY, MAX_MONEY);
+            }
+        });
     }
 
     @Override
@@ -144,8 +130,14 @@ public class AnimalHustlerApp extends GameApplication {
         getPhysicsWorld().setGravity(0, 0);
     }
 
+    // TODO: Reset timer when the current level ends
+    private void loadCurrentLevel(){
+        set(CURRENT_LEVEL, 0);
+        countdownIcon.setCountdown(60, days);
+    }
 
     public static void main(String[] args) {
         launch(args);
     }
+
 }
