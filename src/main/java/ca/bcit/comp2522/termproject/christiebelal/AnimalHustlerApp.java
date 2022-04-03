@@ -5,19 +5,12 @@ import ca.bcit.comp2522.termproject.christiebelal.ui.CountdownIcon;
 import ca.bcit.comp2522.termproject.christiebelal.ui.CurrencyIcon;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
-import com.almasb.fxgl.app.scene.FXGLMenu;
-import com.almasb.fxgl.app.scene.LoadingScene;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.input.virtual.VirtualButton;
-import com.almasb.fxgl.physics.HitBox;
-import com.almasb.fxgl.physics.PhysicsComponent;
-import com.almasb.fxgl.time.Timer;
-import com.almasb.fxgl.time.TimerAction;
-import com.almasb.fxgl.ui.UI;
-import com.almasb.fxgl.ui.UIController;
-import javafx.scene.layout.VBox;
+import com.almasb.fxgl.physics.CollisionHandler;
+import com.almasb.fxgl.physics.PhysicsWorld;
 import javafx.scene.input.KeyCode;
 import java.util.Map;
 
@@ -127,6 +120,8 @@ public class AnimalHustlerApp extends GameApplication {
         countdownIcon = new CountdownIcon();
         loadCurrentLevel();
 
+
+
     }
 
     private void initVarListeners(){
@@ -139,7 +134,19 @@ public class AnimalHustlerApp extends GameApplication {
 
     @Override
     protected void initPhysics() {
-        getPhysicsWorld().setGravity(0, 0);
+        PhysicsWorld physicsWorld = getPhysicsWorld();
+        physicsWorld.setGravity(0, 0);
+
+        physicsWorld.addCollisionHandler(new CollisionHandler(AnimalHustlerType.COW, AnimalHustlerType.PLAYER) {
+            protected void onCollisionBegin(Entity cow, Entity player) {
+                cow.removeFromWorld();
+            }
+        });
+
+
+
+
+
     }
 
     // TODO: Reset timer when the current level ends
