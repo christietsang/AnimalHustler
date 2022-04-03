@@ -27,6 +27,12 @@ public class AnimalHustlerApp extends GameApplication {
         settings.setHeight(20 * 36);
     }
 
+    protected void initGameVars(final Map<String, Object> vars){
+        vars.put(MONEY, 0);
+        vars.put(CURRENT_LEVEL, 0);
+    }
+
+    // TODO: Is it possible to refactor this into a separate class?
     @Override
     protected void initInput() {
         onKeyDown(KeyCode.F, () -> {
@@ -85,21 +91,8 @@ public class AnimalHustlerApp extends GameApplication {
     }
 
     protected void initUI() {
-        Map<String, Runnable> dialogs = new LinkedHashMap<>();
-        getGameTimer().runAtInterval(() -> {
-            VBox content = new VBox(
-                    getUIFactoryService().newText("Days left until start of school: " + days),
-                    getUIFactoryService().newText("Savings: "),
-                    getUIFactoryService().newText("Goal: ")
-            );
-
-            Button btnClose = getUIFactoryService().newButton("Continue to next day...");
-            btnClose.setPrefWidth(300);
-
-            getDialogService().showBox("Today's Summary:", content, btnClose);
-
-        }, Duration.seconds(30));
-
+        addUINode(new CurrencyIcon(), 10, 10);
+        addUINode(countdownIcon, 10, 90);
 
     }
 
