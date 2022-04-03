@@ -2,6 +2,7 @@ package ca.bcit.comp2522.termproject.christiebelal;
 
 import ca.bcit.comp2522.termproject.christiebelal.components.AnimalComponent;
 import ca.bcit.comp2522.termproject.christiebelal.components.PlayerComponent;
+import com.almasb.fxgl.dsl.components.HealthIntComponent;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.EntityFactory;
 import com.almasb.fxgl.entity.SpawnData;
@@ -11,6 +12,7 @@ import com.almasb.fxgl.physics.BoundingShape;
 import com.almasb.fxgl.physics.HitBox;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.physics.box2d.dynamics.BodyType;
+import com.almasb.fxgl.ui.ProgressBar;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
@@ -45,6 +47,15 @@ public class AnimalHustlerFactory implements EntityFactory {
 
     @Spawns("cow")
     public Entity newCow(SpawnData data) {
+        var hp = new HealthIntComponent(5);
+
+        var hpView = new ProgressBar(false);
+        hpView.setFill(Color.LIGHTGREEN);
+        hpView.setMaxValue(5);
+        hpView.setWidth(85);
+        hpView.setTranslateY(90);
+        hpView.currentValueProperty().bind(hp.valueProperty());
+
         PhysicsComponent physics = new PhysicsComponent();
         physics.setBodyType(BodyType.DYNAMIC);
         return entityBuilder(data)
@@ -53,6 +64,8 @@ public class AnimalHustlerFactory implements EntityFactory {
                 .bbox(new HitBox(new Point2D(-5,5), BoundingShape.box(76, 51)))
                 .with(new CollidableComponent(true))
                 .with(new AnimalComponent())
+                .view(hpView)
+                .with(hp)
                 .build();
     }
 

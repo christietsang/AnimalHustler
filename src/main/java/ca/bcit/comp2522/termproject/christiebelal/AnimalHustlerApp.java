@@ -6,6 +6,7 @@ import ca.bcit.comp2522.termproject.christiebelal.ui.CurrencyIcon;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.core.math.FXGLMath;
+import com.almasb.fxgl.dsl.components.HealthIntComponent;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.input.UserAction;
@@ -19,6 +20,7 @@ import javafx.util.Duration;
 
 import java.util.Map;
 
+import static ca.bcit.comp2522.termproject.christiebelal.AnimalHustlerType.COW;
 import static ca.bcit.comp2522.termproject.christiebelal.Variables.Variables.*;
 import static com.almasb.fxgl.dsl.FXGL.*;
 
@@ -36,7 +38,7 @@ public class AnimalHustlerApp extends GameApplication {
     protected void initSettings(GameSettings settings) {
         settings.setWidth(900);
         settings.setHeight(720);
-        settings.setMainMenuEnabled(false);
+        settings.setMainMenuEnabled(true);
         settings.setSceneFactory(new MySceneFactory());
     }
 
@@ -152,7 +154,11 @@ public class AnimalHustlerApp extends GameApplication {
         PhysicsWorld physicsWorld = getPhysicsWorld();
         physicsWorld.setGravity(0, 0);
 
-        physicsWorld.addCollisionHandler(new CollisionHandler(AnimalHustlerType.COW, AnimalHustlerType.PLAYER) {
+        getGameTimer().runAtInterval(() -> {
+            getGameWorld().getEntitiesByType(COW);
+                }, Duration.seconds(1));
+
+        physicsWorld.addCollisionHandler(new CollisionHandler(COW, AnimalHustlerType.PLAYER) {
             protected void onCollisionBegin(Entity cow, Entity player) {
                 cow.removeFromWorld();
                 if (SPAWN_TIMER > 1) {
@@ -161,7 +167,7 @@ public class AnimalHustlerApp extends GameApplication {
             }
         });
 
-        physicsWorld.addCollisionHandler(new CollisionHandler(AnimalHustlerType.WALL, AnimalHustlerType.COW) {
+        physicsWorld.addCollisionHandler(new CollisionHandler(AnimalHustlerType.WALL, COW) {
             protected void onCollisionBegin(Entity wall, Entity cow) {
                 cow.removeFromWorld();
                 spawn("cow",

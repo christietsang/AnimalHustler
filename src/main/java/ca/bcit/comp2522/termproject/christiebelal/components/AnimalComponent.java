@@ -2,11 +2,13 @@ package ca.bcit.comp2522.termproject.christiebelal.components;
 
 import com.almasb.fxgl.core.math.FXGLMath;
 import com.almasb.fxgl.dsl.FXGL;
+import com.almasb.fxgl.dsl.components.HealthIntComponent;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.texture.AnimatedTexture;
 import com.almasb.fxgl.texture.AnimationChannel;
+import javafx.css.converter.DurationConverter;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
 
@@ -35,8 +37,22 @@ public class AnimalComponent extends Component {
         entity.getViewComponent().addChild(texture);
         FXGL.getGameTimer().runOnceAfter(() -> {
             if (!isNull(entity)) {
-            entity.removeFromWorld();
-        }}, Duration.seconds(5));
+                entity.removeFromWorld();
+            }
+        }, Duration.seconds(5));
+
+        FXGL.getGameTimer().runAtInterval(() -> {
+                    if (!isNull(entity)) {
+                        var hp = entity.getComponent(HealthIntComponent.class);
+                        if (hp.getValue() > 1 && !isNull(entity)) {
+                            hp.damage(1);
+                        }
+                        else if (!isNull(entity)) {
+                            entity.removeFromWorld();
+                        }
+                    }
+                },
+                Duration.seconds(1), 5);
     }
 }
 
