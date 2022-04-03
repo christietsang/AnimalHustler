@@ -38,12 +38,6 @@ public class AnimalHustlerApp extends GameApplication {
     // TODO: Is it possible to refactor this into a separate class?
     @Override
     protected void initInput() {
-        onKeyDown(KeyCode.F, () -> {
-            getNotificationService().pushNotification("Hello world");
-            getNotificationService().pushNotification("Hi");
-        });
-        Input input = getInput();
-
         getInput().addAction(new UserAction("Left") {
             @Override
             protected void onAction() {
