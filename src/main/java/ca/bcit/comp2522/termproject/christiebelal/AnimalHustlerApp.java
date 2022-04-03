@@ -32,13 +32,14 @@ public class AnimalHustlerApp extends GameApplication {
     private Integer days;
     private Component playerComponent;
     private CountdownIcon countdownIcon;
+    private int spawnTimer;
 
 
     @Override
     protected void initSettings(GameSettings settings) {
         settings.setWidth(900);
         settings.setHeight(720);
-        settings.setMainMenuEnabled(true);
+        settings.setMainMenuEnabled(false);
         settings.setSceneFactory(new MySceneFactory());
     }
 
@@ -59,6 +60,8 @@ public class AnimalHustlerApp extends GameApplication {
             @Override
             protected void onActionEnd() {
                 player.getComponent(PlayerComponent.class).stop();
+                System.out.println(getGameWorld().getCollidingEntities(player));
+
             }
         }, KeyCode.A, VirtualButton.LEFT);
 
@@ -71,6 +74,8 @@ public class AnimalHustlerApp extends GameApplication {
             @Override
             protected void onActionEnd() {
                 player.getComponent(PlayerComponent.class).stop();
+                System.out.println(getGameWorld().getCollidingEntities(player));
+
             }
         }, KeyCode.D, VirtualButton.RIGHT);
 
@@ -83,6 +88,8 @@ public class AnimalHustlerApp extends GameApplication {
             @Override
             protected void onActionEnd() {
                 player.getComponent(PlayerComponent.class).stop();
+                System.out.println(getGameWorld().getCollidingEntities(player));
+
             }
         }, KeyCode.W, VirtualButton.UP);
 
@@ -90,11 +97,13 @@ public class AnimalHustlerApp extends GameApplication {
             @Override
             protected void onAction() {
                 player.getComponent(PlayerComponent.class).down();
+
             }
 
             @Override
             protected void onActionEnd() {
                 player.getComponent(PlayerComponent.class).stop();
+                System.out.println(getGameWorld().getCollidingEntities(player));
             }
         }, KeyCode.S, VirtualButton.DOWN);
     }
@@ -109,10 +118,11 @@ public class AnimalHustlerApp extends GameApplication {
     protected void initGame() {
         initVarListeners();
         days = 10;
+        spawnTimer = 5;
         getGameWorld().addEntityFactory(new AnimalHustlerFactory());
         setLevelFromMap("AnimalHustlerMap.tmx");
         player = spawn("player", 450, 450);
-        cow = spawn("cow", 100, 100);
+        cow = spawn("cow", 400, 400);
         playerComponent = player.getComponent(PlayerComponent.class);
         countdownIcon = new CountdownIcon();
         loadCurrentLevel();
@@ -134,7 +144,7 @@ public class AnimalHustlerApp extends GameApplication {
 
     // TODO: Reset timer when the current level ends
     private void loadCurrentLevel(){
-        set(CURRENT_LEVEL, 0);
+        set(CURRENT_LEVEL, geti(CURRENT_LEVEL));
         countdownIcon.setCountdown(60, days);
     }
 

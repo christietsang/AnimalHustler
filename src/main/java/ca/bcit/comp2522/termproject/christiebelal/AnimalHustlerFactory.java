@@ -12,6 +12,7 @@ import com.almasb.fxgl.physics.HitBox;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.physics.box2d.dynamics.BodyType;
 import javafx.geometry.Point2D;
+import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 
@@ -49,7 +50,7 @@ public class AnimalHustlerFactory implements EntityFactory {
         return entityBuilder(data)
                 .type(COW)
                 .with(physics)
-                .bbox(new HitBox(new Point2D(76,51), BoundingShape.box(76, 51)))
+                .bbox(new HitBox(new Point2D(0,0), BoundingShape.box(76, 51)))
                 .with(new CollidableComponent(true))
                 .with(new AnimalComponent())
                 .build();
