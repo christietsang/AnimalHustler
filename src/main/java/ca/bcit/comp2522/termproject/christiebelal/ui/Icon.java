@@ -3,7 +3,6 @@ package ca.bcit.comp2522.termproject.christiebelal.ui;
 import javafx.scene.Parent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import org.w3c.dom.Text;
 
 import java.awt.*;
 

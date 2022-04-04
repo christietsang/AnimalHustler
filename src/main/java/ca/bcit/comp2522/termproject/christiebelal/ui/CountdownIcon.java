@@ -32,7 +32,7 @@ public class CountdownIcon extends Icon{
         countdownTimer.setTranslateX(5);
         countdownTimer.setTranslateY(40);
 
-        countdownTimer.textProperty().bind(countdown.asString("%d seconds"));
+        countdownTimer.textProperty().bind(countdown.asString("   %d seconds"));
         countdownTimer.visibleProperty().bind(isCountdownGreaterZero);
 
         timerCondition.bind(isCountdownGreaterZero);
