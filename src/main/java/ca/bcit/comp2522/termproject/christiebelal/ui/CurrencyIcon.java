@@ -6,6 +6,13 @@ import static com.almasb.fxgl.dsl.FXGL.getip;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.getUIFactoryService;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.texture;
 
+/**
+ * Handles the GUI for in-game currency.
+ *
+ * @author Christie Tsang
+ * @author Belal Kourkmas
+ * @version 2022
+ */
 public class CurrencyIcon extends Icon{
     public CurrencyIcon(){
         var currencyTexture = texture("money.png").multiplyColor(Color.GOLD);

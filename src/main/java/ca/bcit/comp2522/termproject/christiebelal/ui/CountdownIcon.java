@@ -15,7 +15,13 @@ import javafx.util.Duration;
 import static com.almasb.fxgl.dsl.FXGL.*;
 import static com.almasb.fxgl.dsl.FXGL.getGameTimer;
 
-
+/**
+ * Handles the countdown clock GUI.
+ *
+ * @author Christie Tsang
+ * @author Belal Kourkmas
+ * @version 2022
+ */
 public class CountdownIcon extends Icon{
     private final Text countdownTimer = getUIFactoryService().newText("", Color.WHITE, 21.0);
     private final BooleanProperty timerCondition = new SimpleBooleanProperty();
@@ -26,9 +32,10 @@ public class CountdownIcon extends Icon{
         countdownTimer.setTranslateX(5);
         countdownTimer.setTranslateY(40);
 
-        timerCondition.bind(isCountdownGreaterZero);
         countdownTimer.textProperty().bind(countdown.asString("%d seconds"));
         countdownTimer.visibleProperty().bind(isCountdownGreaterZero);
+
+        timerCondition.bind(isCountdownGreaterZero);
         getChildren().addAll(countdownTimer);
 
     }

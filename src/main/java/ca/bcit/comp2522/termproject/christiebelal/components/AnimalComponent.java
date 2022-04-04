@@ -1,22 +1,24 @@
 package ca.bcit.comp2522.termproject.christiebelal.components;
 
-import com.almasb.fxgl.core.math.FXGLMath;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.dsl.components.HealthIntComponent;
-import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.texture.AnimatedTexture;
 import com.almasb.fxgl.texture.AnimationChannel;
-import javafx.css.converter.DurationConverter;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
 
-import static ca.bcit.comp2522.termproject.christiebelal.Variables.Variables.SPAWN_TIMER;
-import static com.almasb.fxgl.dsl.FXGL.*;
-import static com.almasb.fxgl.dsl.FXGLForKtKt.getGameTimer;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.image;
 import static java.util.Objects.isNull;
+
+/**
+ * Handles the behavior of spawned animals.
+ *
+ * @author Christie Tsang
+ * @author Belal Kourkmas
+ * @version 2022
+ */
 public class AnimalComponent extends Component {
 
     private PhysicsComponent physics;

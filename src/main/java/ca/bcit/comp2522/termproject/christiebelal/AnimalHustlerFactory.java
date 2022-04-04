@@ -14,21 +14,20 @@ import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.physics.box2d.dynamics.BodyType;
 import com.almasb.fxgl.ui.ProgressBar;
 import javafx.geometry.Point2D;
-import javafx.scene.layout.HBox;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
-
-import java.awt.*;
 
 import static ca.bcit.comp2522.termproject.christiebelal.AnimalHustlerType.*;
 
 
 import static ca.bcit.comp2522.termproject.christiebelal.Variables.Variables.SPAWN_TIMER;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.entityBuilder;
-import static com.almasb.fxgl.dsl.FXGLForKtKt.getGameTimer;
 
 /**
- * @author Almas Baimagambetov (almaslvl@gmail.com)
+ * Handles the properties of game entities.
+ *
+ * @author Christie Tsang
+ * @author Belal Kourkmas
+ * @version 2022
  */
 public class AnimalHustlerFactory implements EntityFactory {
 
@@ -54,7 +53,8 @@ public class AnimalHustlerFactory implements EntityFactory {
         hpView.setFill(Color.LIGHTGREEN);
         hpView.setMaxValue(10);
         hpView.setWidth(85);
-        hpView.setTranslateY(90);
+        hpView.setTranslateY(-15);
+        hpView.setTranslateX(-9);
         hpView.currentValueProperty().bind(hp.valueProperty());
 
         PhysicsComponent physics = new PhysicsComponent();

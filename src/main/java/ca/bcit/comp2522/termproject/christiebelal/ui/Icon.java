@@ -6,6 +6,13 @@ import javafx.scene.shape.Rectangle;
 
 import java.awt.*;
 
+/**
+ * Is the parent class for in-game icons.
+ *
+ * @author Christie Tsang
+ * @author Belal Kourkmas
+ * @version 2022
+ */
 public class Icon extends Parent {
 
     public Icon(){

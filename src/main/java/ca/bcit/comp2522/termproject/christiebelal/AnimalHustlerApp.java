@@ -6,7 +6,6 @@ import ca.bcit.comp2522.termproject.christiebelal.ui.CurrencyIcon;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.core.math.FXGLMath;
-import com.almasb.fxgl.dsl.components.HealthIntComponent;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.input.UserAction;
@@ -14,18 +13,21 @@ import com.almasb.fxgl.input.virtual.VirtualButton;
 import com.almasb.fxgl.physics.CollisionHandler;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.physics.PhysicsWorld;
-import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-
 import java.util.Map;
 
 import static ca.bcit.comp2522.termproject.christiebelal.AnimalHustlerType.COW;
 import static ca.bcit.comp2522.termproject.christiebelal.Variables.Variables.*;
 import static com.almasb.fxgl.dsl.FXGL.*;
 
-
+/**
+ * Drives the game.
+ *
+ * @author Christie Tsang
+ * @author Belal Kourkmas
+ * @version 2022
+ */
 public class AnimalHustlerApp extends GameApplication {
 
     private Entity player;
@@ -39,7 +41,7 @@ public class AnimalHustlerApp extends GameApplication {
     protected void initSettings(GameSettings settings) {
         settings.setWidth(900);
         settings.setHeight(720);
-        settings.setMainMenuEnabled(true);
+        settings.setMainMenuEnabled(false);
         settings.setSceneFactory(new MySceneFactory());
     }
 

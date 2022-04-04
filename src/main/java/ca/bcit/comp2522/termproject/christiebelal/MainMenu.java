@@ -16,6 +16,13 @@ import javafx.scene.text.Text;
 
 import java.sql.SQLException;
 
+/**
+ * Handles the main menu log in.
+ *
+ * @author Christie Tsang
+ * @author Belal Kourkmas
+ * @version 2022
+ */
 public class MainMenu extends FXGLMenu {
     private TextField username;
     private TextField password;
