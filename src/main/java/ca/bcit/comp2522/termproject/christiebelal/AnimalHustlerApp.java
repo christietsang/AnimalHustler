@@ -4,6 +4,7 @@ import ca.bcit.comp2522.termproject.christiebelal.components.AnimalComponent;
 import ca.bcit.comp2522.termproject.christiebelal.components.PlayerComponent;
 import ca.bcit.comp2522.termproject.christiebelal.ui.CountdownIcon;
 import ca.bcit.comp2522.termproject.christiebelal.ui.CurrencyIcon;
+import ca.bcit.comp2522.termproject.christiebelal.ui.UsernameIcon;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.core.math.FXGLMath;
@@ -43,7 +44,7 @@ public class AnimalHustlerApp extends GameApplication {
     protected void initSettings(GameSettings settings) {
         settings.setWidth(900);
         settings.setHeight(720);
-        settings.setMainMenuEnabled(false);
+        settings.setMainMenuEnabled(true);
         settings.setSceneFactory(new MySceneFactory());
     }
 
@@ -114,6 +115,7 @@ public class AnimalHustlerApp extends GameApplication {
     protected void initUI() {
         addUINode(new CurrencyIcon(), 10, 10);
         addUINode(countdownIcon, 10, 90);
+        addUINode(new UsernameIcon());
 
     }
 

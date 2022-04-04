@@ -3,6 +3,7 @@ package ca.bcit.comp2522.termproject.christiebelal.ui;
 import javafx.scene.Parent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import org.w3c.dom.Text;
 
 import java.awt.*;
 
@@ -20,6 +21,7 @@ public class Icon extends Parent {
         background.setStrokeWidth(2.0);
         background.setArcWidth(10);
         background.setArcHeight(10);
+
 
         getChildren().addAll(background);
 

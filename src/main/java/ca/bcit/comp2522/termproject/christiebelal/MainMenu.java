@@ -16,6 +16,8 @@ import javafx.scene.text.Text;
 
 import java.sql.SQLException;
 
+import static ca.bcit.comp2522.termproject.christiebelal.Variables.Variables.currentUsername;
+
 /**
  * Handles the main menu log in.
  *
@@ -98,6 +100,7 @@ public class MainMenu extends FXGLMenu {
                 try {
                     if (
                             DatabaseHandler.CreateUserName(usernameString, passwordString)) {
+                        currentUsername = usernameString;
                         fireNewGame();
                     } else {
                         addChild(badLogin);
