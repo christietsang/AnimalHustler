@@ -10,7 +10,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/cow.png" alt="sunglassesCow" width="160" height="160">
+    <img src="Desktop/School/Object Oriented Programming 1/project/2522-Term-Project-ChristieBelal/images/cow.gif" alt="sunglassesCow" width="160" height="160">
   </a>
 
   <h3 align="center">Animal Hustler</h3>
