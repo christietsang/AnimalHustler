@@ -49,6 +49,11 @@ public class AnimalComponent extends Component {
                 },
                 Duration.millis((SPAWN_TIMER * 1000 / 10) + 100), 10);
     }
+
+    public int getHP(){
+        var hp = entity.getComponent(HealthIntComponent.class);
+        return hp.getValue();
+    }
 }
 
 
