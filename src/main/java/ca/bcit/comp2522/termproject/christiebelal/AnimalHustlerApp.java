@@ -115,8 +115,7 @@ public class AnimalHustlerApp extends GameApplication {
     protected void initUI() {
         addUINode(new CurrencyIcon(), 10, 10);
         addUINode(countdownIcon, 10, 90);
-        addUINode(new UsernameIcon());
-
+        addUINode(new UsernameIcon(), 700, 10);
     }
 
     @Override
@@ -151,14 +150,6 @@ public class AnimalHustlerApp extends GameApplication {
             }, Duration.millis((SPAWN_TIMER * 1000)/2));
 
     }
-
-//    private void initVarListeners() {
-//        getWorldProperties().<Integer>addListener(MONEY, (old, newValue) -> {
-//            if (newValue > MAX_MONEY) {
-//                set(MONEY, MAX_MONEY);
-//            }
-//        });
-//    }
 
     @Override
     protected void initPhysics() {
