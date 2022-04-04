@@ -137,11 +137,13 @@ public class AnimalHustlerApp extends GameApplication {
                 Entity firstCow = spawn("cow",
                         FXGLMath.random(0, getAppWidth() - 10),
                         FXGLMath.random(0, getAppHeight() - 10));
-                getGameTimer().runOnceAfter(() -> {
-                    Entity secondCow = spawn("cow",
-                            FXGLMath.random(0, getAppWidth() - 10),
-                            FXGLMath.random(0, getAppHeight() - 10));
-                }, Duration.millis((SPAWN_TIMER * 1000)/4));
+                if (SPAWN_TIMER % 2 == 0) {
+                    getGameTimer().runOnceAfter(() -> {
+                        Entity secondCow = spawn("cow",
+                                FXGLMath.random(0, getAppWidth() - 10),
+                                FXGLMath.random(0, getAppHeight() - 10));
+                    }, Duration.millis((SPAWN_TIMER * 1000/2)));
+                }
                 spawnCowTimer();
             }, Duration.millis((SPAWN_TIMER * 1000)/2));
 

@@ -9,6 +9,7 @@ import com.almasb.fxgl.texture.AnimationChannel;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
 
+import static ca.bcit.comp2522.termproject.christiebelal.Variables.Variables.SPAWN_TIMER;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.image;
 import static java.util.Objects.isNull;
 
