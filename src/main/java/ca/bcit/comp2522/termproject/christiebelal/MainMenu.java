@@ -66,10 +66,9 @@ public class MainMenu extends FXGLMenu {
                 String usernameString = username.getText();
                 String passwordString = password.getText();
                 removeChild(badLogin);
-//                System.out.printf("Username: %s\nPassword: %s", usernameString, passwordString);
                 try {
-                    if (
-                            DatabaseHandler.checkUserNamePassword(usernameString, passwordString)) {
+                    if (DatabaseHandler.checkUserNamePassword(usernameString, passwordString)) {
+                        currentUsername = usernameString;
                         fireNewGame();
                     } else {
                         addChild(badLogin);
@@ -96,7 +95,6 @@ public class MainMenu extends FXGLMenu {
                 String usernameString = username.getText();
                 String passwordString = password.getText();
                 removeChild(badLogin);
-//                System.out.printf("Username: %s\nPassword: %s", usernameString, passwordString);
                 try {
                     if (
                             DatabaseHandler.CreateUserName(usernameString, passwordString)) {
