@@ -40,7 +40,7 @@ public class CountdownIcon extends Icon{
 
     }
 
-    public void setCountdown(int seconds, int days){
+    public void setCountdown(int seconds){
         countdown.set(seconds);
 
         getGameTimer().runAtIntervalWhile(() -> {
@@ -48,7 +48,6 @@ public class CountdownIcon extends Icon{
                 countdown.set(countdown.get() - 1);
                 if (countdown.get() == 0){
                     VBox content = new VBox(
-                            getUIFactoryService().newText("Days left until start of school: " + days),
                             getUIFactoryService().newText("Savings: "),
                             getUIFactoryService().newText("Goal: ")
                     );
