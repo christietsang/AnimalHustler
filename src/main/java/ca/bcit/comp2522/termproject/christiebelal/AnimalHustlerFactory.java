@@ -23,6 +23,7 @@ import java.awt.*;
 import static ca.bcit.comp2522.termproject.christiebelal.AnimalHustlerType.*;
 
 
+import static ca.bcit.comp2522.termproject.christiebelal.Variables.Variables.SPAWN_TIMER;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.entityBuilder;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.getGameTimer;
 
@@ -47,11 +48,11 @@ public class AnimalHustlerFactory implements EntityFactory {
 
     @Spawns("cow")
     public Entity newCow(SpawnData data) {
-        var hp = new HealthIntComponent(5);
+        var hp = new HealthIntComponent(10);
 
         var hpView = new ProgressBar(false);
         hpView.setFill(Color.LIGHTGREEN);
-        hpView.setMaxValue(5);
+        hpView.setMaxValue(10);
         hpView.setWidth(85);
         hpView.setTranslateY(90);
         hpView.currentValueProperty().bind(hp.valueProperty());

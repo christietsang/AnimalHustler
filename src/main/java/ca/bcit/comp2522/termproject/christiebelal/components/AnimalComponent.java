@@ -17,7 +17,6 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.getGameTimer;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.image;
 import static java.util.Objects.isNull;
-
 public class AnimalComponent extends Component {
 
     private PhysicsComponent physics;
@@ -35,24 +34,17 @@ public class AnimalComponent extends Component {
 
     public void onAdded() {
         entity.getViewComponent().addChild(texture);
-        FXGL.getGameTimer().runOnceAfter(() -> {
-            if (!isNull(entity)) {
-                entity.removeFromWorld();
-            }
-        }, Duration.seconds(5));
-
         FXGL.getGameTimer().runAtInterval(() -> {
                     if (!isNull(entity)) {
                         var hp = entity.getComponent(HealthIntComponent.class);
                         if (hp.getValue() > 1 && !isNull(entity)) {
                             hp.damage(1);
-                        }
-                        else if (!isNull(entity)) {
+                        } else if (!isNull(entity)) {
                             entity.removeFromWorld();
                         }
                     }
                 },
-                Duration.seconds(1), 5);
+                Duration.millis((SPAWN_TIMER * 1000 / 10) + 100), 10);
     }
 }
 

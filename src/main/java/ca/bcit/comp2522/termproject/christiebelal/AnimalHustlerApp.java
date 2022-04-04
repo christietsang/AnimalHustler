@@ -12,6 +12,7 @@ import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.input.virtual.VirtualButton;
 import com.almasb.fxgl.physics.CollisionHandler;
+import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.physics.PhysicsWorld;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
@@ -131,13 +132,16 @@ public class AnimalHustlerApp extends GameApplication {
 
     private void spawnCowTimer() {
             getGameTimer().runOnceAfter(() -> {
-                Entity cow = spawn("cow",
+                Entity firstCow = spawn("cow",
                         FXGLMath.random(0, getAppWidth() - 10),
                         FXGLMath.random(0, getAppHeight() - 10));
-//                System.out.println(SPAWN_TIMER);
-//                inc(SPAWN_TIMER, -1);
+                getGameTimer().runOnceAfter(() -> {
+                    Entity secondCow = spawn("cow",
+                            FXGLMath.random(0, getAppWidth() - 10),
+                            FXGLMath.random(0, getAppHeight() - 10));
+                }, Duration.millis((SPAWN_TIMER * 1000)/4));
                 spawnCowTimer();
-            }, Duration.seconds(SPAWN_TIMER));
+            }, Duration.millis((SPAWN_TIMER * 1000)/2));
 
     }
 
@@ -159,11 +163,12 @@ public class AnimalHustlerApp extends GameApplication {
                 }, Duration.seconds(1));
 
         physicsWorld.addCollisionHandler(new CollisionHandler(COW, AnimalHustlerType.PLAYER) {
-            protected void onCollisionBegin(Entity cow, Entity player) {
+            protected void onCollisionBegin(Entity cow, Entity localPlayer) {
                 cow.removeFromWorld();
                 if (SPAWN_TIMER > 1) {
                     SPAWN_TIMER -= 1;
                 }
+                player.getComponent(PlayerComponent.class).increaseSpeed();
             }
         });
 
@@ -175,8 +180,6 @@ public class AnimalHustlerApp extends GameApplication {
                         FXGLMath.random(0, getAppHeight() - 10));
             }
         });
-
-
     }
 
     // TODO: Reset timer when the current level ends

@@ -14,6 +14,8 @@ public class PlayerComponent extends Component {
     private static final int FRAME_WIDTH_HEIGHT = 72;
     private static final double ANIMATION_DURATION = 0.66;
     private static final int ENDING_FRAME = 3;
+    private static int speed = 300;
+    private static final int SPEED_INCREMENT = 10;
 
     private PhysicsComponent physics;
 
@@ -59,7 +61,9 @@ public class PlayerComponent extends Component {
         textureRight = new AnimatedTexture(animIdleRight);
 
     }
-
+    public void increaseSpeed() {
+        speed += SPEED_INCREMENT;
+    }
     @Override
     public void onUpdate(final double tpf) {
         if (physics.getVelocityX() > 0 && physics.isMovingX()) {
@@ -107,22 +111,22 @@ public class PlayerComponent extends Component {
 
         public void left() {
 //        getEntity().setScaleX(-1);
-        physics.setVelocityX(-170);
+        physics.setVelocityX(speed * -1);
     }
 
     public void right() {
 //        getEntity().setScaleX(1);
-        physics.setVelocityX(170);
+        physics.setVelocityX(speed);
     }
 
     public void up() {
 //        getEntity().setScaleY(1);
-        physics.setVelocityY(-170);
+        physics.setVelocityY(speed * -1);
     }
 
     public void down() {
 //        getEntity().setScaleY(-1);
-        physics.setVelocityY(170);
+        physics.setVelocityY(speed);
     }
 
     public void stop() {
