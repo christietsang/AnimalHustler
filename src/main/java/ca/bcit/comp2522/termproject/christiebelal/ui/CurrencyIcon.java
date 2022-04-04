@@ -13,14 +13,14 @@ import static com.almasb.fxgl.dsl.FXGLForKtKt.texture;
  * @author Belal Kourkmas
  * @version 2022
  */
-public class CurrencyIcon extends Icon{
-    public CurrencyIcon(){
+public class CurrencyIcon extends Icon {
+    public CurrencyIcon() {
         var currencyTexture = texture("money.png").multiplyColor(Color.GOLD);
-        var text = getUIFactoryService().newText("", Color.WHITE, 32.0);
+        var text = getUIFactoryService().newText("", Color.WHITE, 20.0);
         text.textProperty().bind(getip("money").asString());
         text.setTranslateX(54);
         text.setTranslateY(45);
 
-        getChildren().addAll(currencyTexture,text);
+        getChildren().addAll(currencyTexture, text);
     }
 }
