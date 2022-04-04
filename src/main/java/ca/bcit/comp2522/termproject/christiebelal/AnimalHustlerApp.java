@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import javafx.util.Duration;
 
 import java.util.Map;
 
@@ -32,6 +33,7 @@ public class AnimalHustlerApp extends GameApplication {
     private Integer days;
     private Component playerComponent;
     private CountdownIcon countdownIcon;
+//    private double spawnTimer;
 
 
     @Override
