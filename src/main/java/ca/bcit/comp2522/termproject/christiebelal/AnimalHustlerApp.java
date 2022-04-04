@@ -1,11 +1,13 @@
 package ca.bcit.comp2522.termproject.christiebelal;
 
+import ca.bcit.comp2522.termproject.christiebelal.components.AnimalComponent;
 import ca.bcit.comp2522.termproject.christiebelal.components.PlayerComponent;
 import ca.bcit.comp2522.termproject.christiebelal.ui.CountdownIcon;
 import ca.bcit.comp2522.termproject.christiebelal.ui.CurrencyIcon;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.core.math.FXGLMath;
+import com.almasb.fxgl.dsl.components.HealthIntComponent;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.input.UserAction;
@@ -117,8 +119,7 @@ public class AnimalHustlerApp extends GameApplication {
 
     @Override
     protected void initGame() {
-        initVarListeners();
-        days = 10;
+//        initVarListeners();
         getGameWorld().addEntityFactory(new AnimalHustlerFactory());
         setLevelFromMap("AnimalHustlerMap.tmx");
         player = spawn("player", 450, 450);
@@ -149,13 +150,13 @@ public class AnimalHustlerApp extends GameApplication {
 
     }
 
-    private void initVarListeners() {
-        getWorldProperties().<Integer>addListener(MONEY, (old, newValue) -> {
-            if (newValue > MAX_MONEY) {
-                set(MONEY, MAX_MONEY);
-            }
-        });
-    }
+//    private void initVarListeners() {
+//        getWorldProperties().<Integer>addListener(MONEY, (old, newValue) -> {
+//            if (newValue > MAX_MONEY) {
+//                set(MONEY, MAX_MONEY);
+//            }
+//        });
+//    }
 
     @Override
     protected void initPhysics() {
@@ -173,6 +174,8 @@ public class AnimalHustlerApp extends GameApplication {
                     SPAWN_TIMER -= 1;
                 }
                 player.getComponent(PlayerComponent.class).increaseSpeed();
+                int cowHealth = cow.getComponent(AnimalComponent.class).getHP();
+                inc(MONEY, 10 * cowHealth);
             }
         });
 
@@ -189,7 +192,7 @@ public class AnimalHustlerApp extends GameApplication {
     // TODO: Reset timer when the current level ends
     private void loadCurrentLevel() {
         set(CURRENT_LEVEL, geti(CURRENT_LEVEL) + 1);
-        countdownIcon.setCountdown(60, days);
+        countdownIcon.setCountdown(70);
     }
 
     public static void main(String[] args) {
