@@ -9,11 +9,11 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/cow.gif" alt="sunglassesCow" width="428" height="428">
+  <a href="https://github.com/christietsang/2522-Term-Project-ChristieBelal">
+    <img src="images/cow.gif" alt="sunglassesCow" width="180" height="180">
   </a>
 
-  <h3 align="center">Animal Hustler</h3>
+  <h1 align="center">Animal Hustler</h1>
 
   <p align="center">
     A game where you feed as many cows as possible before the timer runs out!
