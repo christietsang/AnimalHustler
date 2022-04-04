@@ -10,6 +10,13 @@ import javafx.util.Duration;
 
 import static com.almasb.fxgl.dsl.FXGL.image;
 
+/**
+ * Handles the behavior of main character.
+ *
+ * @author Christie Tsang
+ * @author Belal Kourkmas
+ * @version 2022
+ */
 public class PlayerComponent extends Component {
     private static final int FRAME_WIDTH_HEIGHT = 72;
     private static final double ANIMATION_DURATION = 0.66;

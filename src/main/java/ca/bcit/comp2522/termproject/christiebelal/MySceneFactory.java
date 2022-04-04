@@ -4,6 +4,13 @@ import com.almasb.fxgl.app.scene.FXGLMenu;
 import com.almasb.fxgl.app.scene.MenuType;
 import com.almasb.fxgl.app.scene.SceneFactory;
 
+/**
+ * Returns a custom main menu.
+ *
+ * @author Christie Tsang
+ * @author Belal Kourkmas
+ * @version 2022
+ */
 public class MySceneFactory extends SceneFactory {
 
     @Override
@@ -11,8 +18,4 @@ public class MySceneFactory extends SceneFactory {
         return new MainMenu(MenuType.MAIN_MENU);
     }
 
-//    @Override
-//    public FXGLMenu newGameMenu() {
-//        return new MainMenu(MenuType.GAME_MENU);
-//    }
 }
