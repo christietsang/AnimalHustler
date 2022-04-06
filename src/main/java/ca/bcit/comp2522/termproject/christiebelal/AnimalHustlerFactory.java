@@ -19,11 +19,14 @@ import com.almasb.fxgl.ui.ProgressBar;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import ca.bcit.comp2522.termproject.christiebelal.AnimalHustlerApp.*;
 
 import static ca.bcit.comp2522.termproject.christiebelal.AnimalHustlerType.*;
 
 
 import static ca.bcit.comp2522.termproject.christiebelal.Variables.Variables.SPAWN_TIMER;
+import static com.almasb.fxgl.dsl.FXGL.getGameTimer;
+import static com.almasb.fxgl.dsl.FXGL.getNotificationService;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.*;
 
 /**
@@ -34,7 +37,6 @@ import static com.almasb.fxgl.dsl.FXGLForKtKt.*;
  * @version 2022
  */
 public class AnimalHustlerFactory implements EntityFactory {
-
     @Spawns("player")
     public Entity newPlayer(SpawnData data) {
 
@@ -83,6 +85,7 @@ public class AnimalHustlerFactory implements EntityFactory {
                 .with(new CollidableComponent(true))
                 .build();
     }
+
     @Spawns("explosion")
     public Entity newExplosion(SpawnData data) {
         play("explosion.wav");
@@ -100,5 +103,4 @@ public class AnimalHustlerFactory implements EntityFactory {
                 .with(new ParticleComponent(emitter))
                 .build();
     }
-
 }

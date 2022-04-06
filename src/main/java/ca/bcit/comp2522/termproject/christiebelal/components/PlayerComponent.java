@@ -6,9 +6,10 @@ import com.almasb.fxgl.texture.AnimatedTexture;
 import com.almasb.fxgl.texture.AnimationChannel;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
-import static com.almasb.fxgl.dsl.FXGL.image;
+import static com.almasb.fxgl.dsl.FXGL.*;
 
 /**
  * Handles the behavior of main character.
@@ -87,6 +88,15 @@ public class PlayerComponent extends Component {
         }
     }
 
+    private void tutorial() {
+        getNotificationService().setBackgroundColor(Color.BLUE);
+        getGameTimer().runOnceAfter(() -> {
+            getNotificationService().pushNotification("WASD to Move");
+        }, Duration.millis(1));
+        getGameTimer().runOnceAfter(() -> {
+            getNotificationService().pushNotification("Feed the cows to get money!");
+        }, Duration.seconds(3));
+    }
     private void texturesDown(final AnimatedTexture localTextureDown, final AnimatedTexture localTextureUp,
                               final AnimatedTexture localTextureLeft, final AnimatedTexture localTextureRight,
                               final AnimationChannel localAnimWalkDown) {
@@ -113,7 +123,7 @@ public class PlayerComponent extends Component {
     public void onAdded() {
         entity.getTransformComponent().setScaleOrigin(new Point2D(0, 0));
         entity.getViewComponent().addChild(textureDown);
-
+        tutorial();
     }
 
         public void left() {

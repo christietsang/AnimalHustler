@@ -7,5 +7,5 @@ package ca.bcit.comp2522.termproject.christiebelal;
  * @version 2022
  */
 public enum AnimalHustlerType {
-    WALL, PLAYER, COW,
+    WALL, PLAYER, COW
 }
