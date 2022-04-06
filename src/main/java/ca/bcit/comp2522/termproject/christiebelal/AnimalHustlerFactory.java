@@ -2,12 +2,15 @@ package ca.bcit.comp2522.termproject.christiebelal;
 
 import ca.bcit.comp2522.termproject.christiebelal.components.AnimalComponent;
 import ca.bcit.comp2522.termproject.christiebelal.components.PlayerComponent;
+import com.almasb.fxgl.dsl.components.ExpireCleanComponent;
 import com.almasb.fxgl.dsl.components.HealthIntComponent;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.EntityFactory;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.Spawns;
 import com.almasb.fxgl.entity.components.CollidableComponent;
+import com.almasb.fxgl.particle.ParticleComponent;
+import com.almasb.fxgl.particle.ParticleEmitters;
 import com.almasb.fxgl.physics.BoundingShape;
 import com.almasb.fxgl.physics.HitBox;
 import com.almasb.fxgl.physics.PhysicsComponent;
@@ -15,12 +18,13 @@ import com.almasb.fxgl.physics.box2d.dynamics.BodyType;
 import com.almasb.fxgl.ui.ProgressBar;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 import static ca.bcit.comp2522.termproject.christiebelal.AnimalHustlerType.*;
 
 
 import static ca.bcit.comp2522.termproject.christiebelal.Variables.Variables.SPAWN_TIMER;
-import static com.almasb.fxgl.dsl.FXGLForKtKt.entityBuilder;
+import static com.almasb.fxgl.dsl.FXGLForKtKt.*;
 
 /**
  * Handles the properties of game entities.
@@ -79,6 +83,22 @@ public class AnimalHustlerFactory implements EntityFactory {
                 .with(new CollidableComponent(true))
                 .build();
     }
+    @Spawns("explosion")
+    public Entity newExplosion(SpawnData data) {
+        play("explosion.wav");
 
+        var emitter = ParticleEmitters.newExplosionEmitter(350);
+        emitter.setMaxEmissions(1);
+        emitter.setSize(2, 10);
+        emitter.setStartColor(Color.WHITE);
+        emitter.setEndColor(Color.BLUE);
+        emitter.setSpawnPointFunction(i -> new Point2D(64, 64));
+
+        return entityBuilder(data)
+                .view(texture("explosion.png").toAnimatedTexture(16, Duration.seconds(0.66)).play())
+                .with(new ExpireCleanComponent(Duration.seconds(0.66)))
+                .with(new ParticleComponent(emitter))
+                .build();
+    }
 
 }
