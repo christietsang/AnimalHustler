@@ -17,6 +17,7 @@ import com.almasb.fxgl.physics.CollisionHandler;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.physics.PhysicsWorld;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import java.util.Map;
 
@@ -79,7 +80,6 @@ public class AnimalHustlerApp extends GameApplication {
             @Override
             protected void onActionEnd() {
                 player.getComponent(PlayerComponent.class).stop();
-                System.out.println(getGameWorld().getCollidingEntities(player));
 
             }
         }, KeyCode.D, VirtualButton.RIGHT);
@@ -92,7 +92,6 @@ public class AnimalHustlerApp extends GameApplication {
             @Override
             protected void onActionEnd() {
                 player.getComponent(PlayerComponent.class).stop();
-                System.out.println(getGameWorld().getCollidingEntities(player));
 
             }
         }, KeyCode.W, VirtualButton.UP);
@@ -101,13 +100,11 @@ public class AnimalHustlerApp extends GameApplication {
             @Override
             protected void onAction() {
                 player.getComponent(PlayerComponent.class).down();
-
             }
 
             @Override
             protected void onActionEnd() {
                 player.getComponent(PlayerComponent.class).stop();
-                System.out.println(getGameWorld().getCollidingEntities(player));
             }
         }, KeyCode.S, VirtualButton.DOWN);
     }
@@ -129,7 +126,6 @@ public class AnimalHustlerApp extends GameApplication {
                 FXGLMath.random(0, getAppHeight() - 10));
         spawnCowTimer();
         playerComponent = player.getComponent(PlayerComponent.class);
-
         countdownIcon = new CountdownIcon();
         loadCurrentLevel();
     }
@@ -168,7 +164,7 @@ public class AnimalHustlerApp extends GameApplication {
                 }
                 player.getComponent(PlayerComponent.class).increaseSpeed();
                 int cowHealth = cow.getComponent(AnimalComponent.class).getHP();
-                inc(MONEY, 10 * cowHealth);
+                inc(MONEY, 10 * cowHealth + 50);
             }
         });
 
