@@ -40,7 +40,6 @@ public class AnimalHustlerApp extends GameApplication {
     private Component playerComponent;
     private CountdownIcon countdownIcon;
 
-
     @Override
     protected void initSettings(GameSettings settings) {
         settings.setWidth(900);
@@ -117,7 +116,6 @@ public class AnimalHustlerApp extends GameApplication {
 
     @Override
     protected void initGame() {
-//        initVarListeners();
         getGameWorld().addEntityFactory(new AnimalHustlerFactory());
         setLevelFromMap("AnimalHustlerMap.tmx");
         player = spawn("player", 450, 450);

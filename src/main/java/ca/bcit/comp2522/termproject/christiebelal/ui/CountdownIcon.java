@@ -12,6 +12,7 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 
+import static ca.bcit.comp2522.termproject.christiebelal.Variables.Variables.MONEY;
 import static com.almasb.fxgl.dsl.FXGL.*;
 import static com.almasb.fxgl.dsl.FXGL.getGameTimer;
 
@@ -48,7 +49,7 @@ public class CountdownIcon extends Icon{
                 countdown.set(countdown.get() - 1);
                 if (countdown.get() == 0){
                     VBox content = new VBox(
-                            getUIFactoryService().newText("Savings: "),
+                            getUIFactoryService().newText(String.format("Savings: %d", geti("money"))),
                             getUIFactoryService().newText("Goal: ")
                     );
 
