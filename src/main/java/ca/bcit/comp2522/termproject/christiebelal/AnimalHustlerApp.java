@@ -132,7 +132,6 @@ public class AnimalHustlerApp extends GameApplication {
 
     private void initializeValues() {
         SPAWN_TIMER = 10;
-
     }
     private void spawnCowTimer() {
             getGameTimer().runOnceAfter(() -> {

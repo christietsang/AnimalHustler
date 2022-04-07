@@ -87,7 +87,6 @@ public class MainMenu extends FXGLMenu {
         createButton.setTranslateX(319);
         createButton.setTranslateY(560);
 
-
         // Create account button
         createButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
