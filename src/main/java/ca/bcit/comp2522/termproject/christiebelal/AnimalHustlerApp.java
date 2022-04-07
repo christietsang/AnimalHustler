@@ -128,6 +128,7 @@ public class AnimalHustlerApp extends GameApplication {
         playerComponent = player.getComponent(PlayerComponent.class);
         countdownIcon = new CountdownIcon();
         loadCurrentLevel();
+        play("background.wav");
     }
 
     private void initializeValues() {
@@ -167,6 +168,7 @@ public class AnimalHustlerApp extends GameApplication {
                 }
                 player.getComponent(PlayerComponent.class).increaseSpeed();
                 int cowHealth = cow.getComponent(AnimalComponent.class).getHP();
+                play("cash.wav");
                 inc(MONEY, 10 * cowHealth + 50);
             }
         });
@@ -184,7 +186,7 @@ public class AnimalHustlerApp extends GameApplication {
     // TODO: Reset timer when the current level ends
     private void loadCurrentLevel() {
         set(CURRENT_LEVEL, geti(CURRENT_LEVEL) + 1);
-        countdownIcon.setCountdown(10);
+        countdownIcon.setCountdown(80);
     }
 
     public static void main(String[] args) {
