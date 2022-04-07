@@ -1,10 +1,13 @@
 package ca.bcit.comp2522.termproject.christiebelal.ui;
 
+import ca.bcit.comp2522.termproject.christiebelal.DatabaseHandler;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -12,7 +15,10 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 
+import java.sql.SQLException;
+
 import static ca.bcit.comp2522.termproject.christiebelal.Variables.Variables.MONEY;
+import static ca.bcit.comp2522.termproject.christiebelal.Variables.Variables.currentUsername;
 import static com.almasb.fxgl.dsl.FXGL.*;
 import static com.almasb.fxgl.dsl.FXGL.getGameTimer;
 
@@ -55,7 +61,12 @@ public class CountdownIcon extends Icon{
 
                     Button btnClose = getUIFactoryService().newButton("Continue to next day...");
                     btnClose.setPrefWidth(300);
-
+                    btnClose.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent actionEvent) {
+                            getGameController().gotoMainMenu();
+                        }
+                    });
                     getDialogService().showBox("Today's Summary:", content, btnClose);
                 }
             }

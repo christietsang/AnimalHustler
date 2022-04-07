@@ -10,6 +10,7 @@ import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.core.math.FXGLMath;
 import com.almasb.fxgl.dsl.components.HealthIntComponent;
 import com.almasb.fxgl.entity.Entity;
+import com.almasb.fxgl.entity.Spawns;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.input.virtual.VirtualButton;
@@ -116,6 +117,7 @@ public class AnimalHustlerApp extends GameApplication {
 
     @Override
     protected void initGame() {
+        initializeValues();
         getGameWorld().addEntityFactory(new AnimalHustlerFactory());
         setLevelFromMap("AnimalHustlerMap.tmx");
         player = spawn("player", 450, 450);
@@ -128,6 +130,10 @@ public class AnimalHustlerApp extends GameApplication {
         loadCurrentLevel();
     }
 
+    private void initializeValues() {
+        SPAWN_TIMER = 10;
+
+    }
     private void spawnCowTimer() {
             getGameTimer().runOnceAfter(() -> {
                 Entity firstCow = spawn("cow",
@@ -179,7 +185,7 @@ public class AnimalHustlerApp extends GameApplication {
     // TODO: Reset timer when the current level ends
     private void loadCurrentLevel() {
         set(CURRENT_LEVEL, geti(CURRENT_LEVEL) + 1);
-        countdownIcon.setCountdown(70);
+        countdownIcon.setCountdown(10);
     }
 
     public static void main(String[] args) {
