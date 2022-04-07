@@ -29,13 +29,13 @@ import static com.almasb.fxgl.dsl.FXGL.getGameTimer;
  * @author Belal Kourkmas
  * @version 2022
  */
-public class CountdownIcon extends Icon{
+public class CountdownIcon extends Icon {
     private final Text countdownTimer = getUIFactoryService().newText("", Color.WHITE, 21.0);
     private final BooleanProperty timerCondition = new SimpleBooleanProperty();
     private final IntegerProperty countdown = new SimpleIntegerProperty(0);
     private final BooleanBinding isCountdownGreaterZero = countdown.greaterThan(0);
 
-    public CountdownIcon(){
+    public CountdownIcon() {
         countdownTimer.setTranslateX(5);
         countdownTimer.setTranslateY(40);
 
@@ -47,13 +47,13 @@ public class CountdownIcon extends Icon{
 
     }
 
-    public void setCountdown(int seconds){
+    public void setCountdown(int seconds) {
         countdown.set(seconds);
 
         getGameTimer().runAtIntervalWhile(() -> {
-            if (countdown.get() > 0){
+            if (countdown.get() > 0) {
                 countdown.set(countdown.get() - 1);
-                if (countdown.get() == 0){
+                if (countdown.get() == 0) {
                     VBox content = new VBox(
                             getUIFactoryService().newText(String.format("Savings: %d", geti("money"))),
                             getUIFactoryService().newText("Goal: ")
