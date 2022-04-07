@@ -22,7 +22,7 @@ public class PlayerComponent extends Component {
     private static final int FRAME_WIDTH_HEIGHT = 72;
     private static final double ANIMATION_DURATION = 0.66;
     private static final int ENDING_FRAME = 3;
-    private static int speed = 300;
+    private int speed = 300;
     private static final int SPEED_INCREMENT = 10;
 
     private PhysicsComponent physics;
@@ -129,6 +129,7 @@ public class PlayerComponent extends Component {
         public void left() {
 //        getEntity().setScaleX(-1);
         physics.setVelocityX(speed * -1);
+            System.out.println(speed);
     }
 
     public void right() {
