@@ -20,7 +20,10 @@ import com.almasb.fxgl.physics.PhysicsWorld;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+
+import java.sql.SQLException;
 import java.util.Map;
+import ca.bcit.comp2522.termproject.christiebelal.DatabaseHandler.*;
 
 import static ca.bcit.comp2522.termproject.christiebelal.AnimalHustlerType.COW;
 import static ca.bcit.comp2522.termproject.christiebelal.Variables.Variables.*;
@@ -186,9 +189,8 @@ public class AnimalHustlerApp extends GameApplication {
     // TODO: Reset timer when the current level ends
     private void loadCurrentLevel() {
         set(CURRENT_LEVEL, geti(CURRENT_LEVEL) + 1);
-        countdownIcon.setCountdown(80);
+        countdownIcon.setCountdown(5);
     }
-
     public static void main(String[] args) {
         launch(args);
     }

@@ -14,7 +14,7 @@ public final class DatabaseHandler {
         Class.forName("com.mysql.cj.jdbc.Driver");
 
         // We identify the driver, the rdbms, the host, the port, and the schema name
-        final String URL = "jdbc:mysql://localhost:3306/comp2522";
+        final String URL = "jdbc:mysql://localhost:3306/animalhustlerdatabase";
 
         // We need to send a user and a password when we try to connect!
         Properties connectionProperties = new Properties();
@@ -47,4 +47,8 @@ public final class DatabaseHandler {
         }
         return false;
     }
+    public static void addScore(String usernameEntry, int score) throws SQLException, ClassNotFoundException {
+        Statement stmt = createConnection().createStatement();
+        stmt.executeUpdate("INSERT INTO scores VALUES('" + usernameEntry + "', " + score + ")");
+        }
 }

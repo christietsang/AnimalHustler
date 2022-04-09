@@ -1,5 +1,6 @@
 package ca.bcit.comp2522.termproject.christiebelal.ui;
 
+import ca.bcit.comp2522.termproject.christiebelal.AnimalHustlerApp;
 import ca.bcit.comp2522.termproject.christiebelal.DatabaseHandler;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
@@ -54,12 +55,16 @@ public class CountdownIcon extends Icon {
             if (countdown.get() > 0) {
                 countdown.set(countdown.get() - 1);
                 if (countdown.get() == 0) {
+                    try {
+                        sendScore();
+                    } catch (SQLException | ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
                     VBox content = new VBox(
                             getUIFactoryService().newText(String.format("Savings: %d", geti("money"))),
                             getUIFactoryService().newText("Goal: ")
                     );
-
-                    Button btnClose = getUIFactoryService().newButton("Continue to next day...");
+                    Button btnClose = getUIFactoryService().newButton("Return to main menu");
                     btnClose.setPrefWidth(300);
                     btnClose.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
@@ -71,5 +76,8 @@ public class CountdownIcon extends Icon {
                 }
             }
         }, Duration.seconds(1), timerCondition);
+    }
+    private void sendScore() throws SQLException, ClassNotFoundException {
+        DatabaseHandler.addScore(currentUsername, geti("money"));
     }
 }
