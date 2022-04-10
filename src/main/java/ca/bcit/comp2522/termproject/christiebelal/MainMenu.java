@@ -96,7 +96,7 @@ public class MainMenu extends FXGLMenu {
                 removeChild(badLogin);
                 try {
                     if (
-                            DatabaseHandler.CreateUserName(usernameString, passwordString)) {
+                            DatabaseHandler.createUserName(usernameString, passwordString)) {
                         currentUsername = usernameString;
                         fireNewGame();
                     } else {

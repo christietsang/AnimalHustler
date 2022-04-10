@@ -5,17 +5,22 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 /**
- * @author BCIT
+ * Handles the behavior of spawned animals.
+ *
+ * @author Christie Tsang
+ * @author Belal Kourkmas
  * @version 2022
  */
 public final class DatabaseHandler {
+    private DatabaseHandler() {
+    }
 
     private static Connection createConnection() throws ClassNotFoundException, SQLException {
         // We register the Driver
         Class.forName("com.mysql.cj.jdbc.Driver");
 
         // We identify the driver, the rdbms, the host, the port, and the schema name
-        final String URL = "jdbc:mysql://localhost:3306/animalhustlerdatabase";
+        final String url = "jdbc:mysql://localhost:3306/animalhustlerdatabase";
 
         // We need to send a user and a password when we try to connect!
         Properties connectionProperties = new Properties();
@@ -23,22 +28,29 @@ public final class DatabaseHandler {
         connectionProperties.put("password", "admin");
 
         // We establish a connection...
-        Connection connection = DriverManager.getConnection(URL, connectionProperties);
+        Connection connection = DriverManager.getConnection(url, connectionProperties);
         if (connection != null) {
             System.out.println("Successfully connected to MySQL database test");
         }
         return connection;
     }
 
-    public static boolean checkUserNamePassword(String usernameEntry, String passwordEntry) throws ClassNotFoundException, SQLException {
+    /**
+     * @param usernameEntry
+     * @param passwordEntry
+     * @return
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
+    public static boolean checkUserNamePassword(final String usernameEntry, final String passwordEntry) throws ClassNotFoundException, SQLException {
 
         Statement stmt = createConnection().createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE user_id = '" + usernameEntry + "' AND password = '" + passwordEntry + "'");
-        boolean works = rs.next();
-        return works;
+        ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE user_id = '" + usernameEntry + "'AND password = '" + passwordEntry + "'");
+        return rs.next();
     }
 
-    public static boolean CreateUserName(String usernameEntry, String passwordEntry) throws SQLException, ClassNotFoundException {
+    public static boolean createUserName(final String usernameEntry, final String passwordEntry) throws SQLException,
+            ClassNotFoundException {
         Statement stmt = createConnection().createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM USERS WHERE user_id = '" + usernameEntry + "'");
         if (!rs.next()) {
