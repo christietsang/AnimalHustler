@@ -36,19 +36,32 @@ public final class DatabaseHandler {
     }
 
     /**
-     * @param usernameEntry
-     * @param passwordEntry
-     * @return
-     * @throws ClassNotFoundException
-     * @throws SQLException
+     * Checks the username and password.
+     *
+     * @param usernameEntry must be a string representing the user's username
+     * @param passwordEntry must be a string representing the user's password
+     * @return Boolean value of True or False
+     * @throws ClassNotFoundException if class with the specified name cannot be found
+     * @throws SQLException           if there is a database error
      */
-    public static boolean checkUserNamePassword(final String usernameEntry, final String passwordEntry) throws ClassNotFoundException, SQLException {
+    public static boolean checkUserNamePassword(final String usernameEntry, final String passwordEntry) throws
+            ClassNotFoundException, SQLException {
 
         Statement stmt = createConnection().createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE user_id = '" + usernameEntry + "'AND password = '" + passwordEntry + "'");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE user_id = '" + usernameEntry
+                + "'AND password = '" + passwordEntry + "'");
         return rs.next();
     }
 
+    /**
+     * Creates username.
+     *
+     * @param usernameEntry must be a string representing the user's username
+     * @param passwordEntry must be a string representing the user's password
+     * @return boolean value of True or False
+     * @throws ClassNotFoundException if class with the specified name cannot be found
+     * @throws SQLException           if there is a database error
+     */
     public static boolean createUserName(final String usernameEntry, final String passwordEntry) throws SQLException,
             ClassNotFoundException {
         Statement stmt = createConnection().createStatement();
@@ -60,18 +73,34 @@ public final class DatabaseHandler {
         return false;
     }
 
-    public static void addScore(String usernameEntry, int score) throws SQLException, ClassNotFoundException {
+    /**
+     * Adds the user's score to the database at the end of the game.
+     *
+     * @param usernameEntry must be a string representing the user's username
+     * @param score         must be an integer representing the user's score
+     * @throws ClassNotFoundException if class with the specified name cannot be found
+     * @throws SQLException           if there is a database error
+     */
+    public static void addScore(final String usernameEntry, final int score) throws SQLException,
+            ClassNotFoundException {
         Statement stmt = createConnection().createStatement();
         stmt.executeUpdate("INSERT INTO userscores VALUES('" + usernameEntry + "', " + score + ")");
     }
 
+    /**
+     * Returns the top 5 scores and usernames.
+     *
+     * @return an Array List of String containing the top 5 scores
+     * @throws ClassNotFoundException if class with the specified name cannot be found
+     * @throws SQLException           if there is a database error
+     */
     public static ArrayList<String> getTopScores() throws SQLException, ClassNotFoundException {
         ArrayList<String> topScores = new ArrayList<>();
         Statement stmt = createConnection().createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * \n" +
-                "FROM userscores\n" +
-                "ORDER BY scores DESC\n" +
-                "LIMIT 5");
+        ResultSet rs = stmt.executeQuery("SELECT * \n"
+                + "FROM userscores\n"
+                + "ORDER BY scores DESC\n"
+                + "LIMIT 5");
         while (rs.next()) {
             topScores.add(rs.getString("user_id"));
             topScores.add(rs.getString("scores"));
