@@ -25,7 +25,7 @@ public final class DatabaseHandler {
         // We need to send a user and a password when we try to connect!
         Properties connectionProperties = new Properties();
         connectionProperties.put("user", "root");
-        connectionProperties.put("password", "admin");
+        connectionProperties.put("password", "girlguide");
 
         // We establish a connection...
         Connection connection = DriverManager.getConnection(url, connectionProperties);
