@@ -74,7 +74,7 @@ public class MainMenu extends FXGLMenu {
             removeChild(badLogin);
             try {
                 if (
-                        DatabaseHandler.CreateUserName(usernameString, passwordString)) {
+                        DatabaseHandler.createUserName(usernameString, passwordString)) {
                     currentUsername = usernameString;
                     fireNewGame();
                 } else {
@@ -86,8 +86,6 @@ public class MainMenu extends FXGLMenu {
         });
         addChild(createButton);
     }
-
-
     private Text createBadLogin() {
         final int textSizeWidth = 142;
         final int textSizeHeight = 80;
