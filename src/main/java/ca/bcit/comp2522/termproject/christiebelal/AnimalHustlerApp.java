@@ -16,14 +16,25 @@ import com.almasb.fxgl.physics.CollisionHandler;
 import com.almasb.fxgl.physics.PhysicsWorld;
 import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
-
-import java.sql.SQLException;
 import java.util.Map;
-import ca.bcit.comp2522.termproject.christiebelal.DatabaseHandler.*;
 
 import static ca.bcit.comp2522.termproject.christiebelal.AnimalHustlerType.COW;
-import static ca.bcit.comp2522.termproject.christiebelal.Variables.Variables.*;
-import static com.almasb.fxgl.dsl.FXGL.*;
+import static ca.bcit.comp2522.termproject.christiebelal.Variables.Variables.CURRENT_LEVEL;
+import static ca.bcit.comp2522.termproject.christiebelal.Variables.Variables.MONEY;
+import static ca.bcit.comp2522.termproject.christiebelal.Variables.Variables.SPAWN_TIMER;
+import static com.almasb.fxgl.dsl.FXGL.addUINode;
+import static com.almasb.fxgl.dsl.FXGL.getAppHeight;
+import static com.almasb.fxgl.dsl.FXGL.getAppWidth;
+import static com.almasb.fxgl.dsl.FXGL.getGameTimer;
+import static com.almasb.fxgl.dsl.FXGL.getGameWorld;
+import static com.almasb.fxgl.dsl.FXGL.getInput;
+import static com.almasb.fxgl.dsl.FXGL.getPhysicsWorld;
+import static com.almasb.fxgl.dsl.FXGL.geti;
+import static com.almasb.fxgl.dsl.FXGL.inc;
+import static com.almasb.fxgl.dsl.FXGL.play;
+import static com.almasb.fxgl.dsl.FXGL.set;
+import static com.almasb.fxgl.dsl.FXGL.setLevelFromMap;
+import static com.almasb.fxgl.dsl.FXGL.spawn;
 
 /**
  * Drives the game.
@@ -37,14 +48,13 @@ public class AnimalHustlerApp extends GameApplication {
     private Entity player;
     private Entity cow;
     private Integer days;
-    private Component playerComponent;
     private CountdownIcon countdownIcon;
 
     @Override
-    protected void initSettings(GameSettings settings) {
+    protected void initSettings(final GameSettings settings) {
         settings.setWidth(900);
         settings.setHeight(720);
-        settings.setMainMenuEnabled(false);
+        settings.setMainMenuEnabled(true);
         settings.setSceneFactory(new MySceneFactory());
     }
 
@@ -118,11 +128,11 @@ public class AnimalHustlerApp extends GameApplication {
         getGameWorld().addEntityFactory(new AnimalHustlerFactory());
         setLevelFromMap("AnimalHustlerMap.tmx");
         player = spawn("player", 450, 450);
-        Entity cow = spawn("cow",
+        spawn("cow",
                 FXGLMath.random(0, getAppWidth() - 10),
                 FXGLMath.random(0, getAppHeight() - 10));
         spawnCowTimer();
-        playerComponent = player.getComponent(PlayerComponent.class);
+        Component playerComponent = player.getComponent(PlayerComponent.class);
         countdownIcon = new CountdownIcon();
         loadCurrentLevel();
         play("background.wav");
