@@ -17,6 +17,7 @@ import javafx.util.Duration;
 
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import static ca.bcit.comp2522.termproject.christiebelal.Variables.Variables.MONEY;
 import static ca.bcit.comp2522.termproject.christiebelal.Variables.Variables.currentUsername;
@@ -55,15 +56,22 @@ public class CountdownIcon extends Icon {
             if (countdown.get() > 0) {
                 countdown.set(countdown.get() - 1);
                 if (countdown.get() == 0) {
+                    ArrayList<String> top = new ArrayList<>();
                     try {
                         sendScore();
+                        top = getScores();
                     } catch (SQLException | ClassNotFoundException e) {
                         e.printStackTrace();
                     }
+                    StringBuilder allScores = new StringBuilder();
+                    for (int i = 0; i < top.size(); i += 2) {
+                        allScores.append(String.format("\t\t\t\t%d: %-20.20s \t %20s\n", (i/2 + 1), top.get(i), top.get(i+1)));
+                    }
                     VBox content = new VBox(
-                            getUIFactoryService().newText(String.format("Savings: %d", geti("money"))),
-                            getUIFactoryService().newText("Goal: ")
-                    );
+                            getUIFactoryService().newText(String.format("\t\t\t\t\t\t  Savings: %d", geti("money"))),
+                            getUIFactoryService().newText("\n"),
+                            getUIFactoryService().newText(String.format("\t\t\t\t\t        HIGH SCORES")),
+                            getUIFactoryService().newText(String.format("%s", allScores)));
                     Button btnClose = getUIFactoryService().newButton("Return to main menu");
                     btnClose.setPrefWidth(300);
                     btnClose.setOnAction(new EventHandler<ActionEvent>() {
@@ -72,12 +80,15 @@ public class CountdownIcon extends Icon {
                             getGameController().gotoMainMenu();
                         }
                     });
-                    getDialogService().showBox("Today's Summary:", content, btnClose);
+                    getDialogService().showBox("Your Score:", content, btnClose);
                 }
             }
         }, Duration.seconds(1), timerCondition);
     }
     private void sendScore() throws SQLException, ClassNotFoundException {
         DatabaseHandler.addScore(currentUsername, geti("money"));
+    }
+    private ArrayList<String> getScores() throws SQLException, ClassNotFoundException {
+        return DatabaseHandler.getTopScores();
     }
 }
