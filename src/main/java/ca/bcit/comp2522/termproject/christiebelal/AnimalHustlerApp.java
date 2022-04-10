@@ -63,7 +63,7 @@ public class AnimalHustlerApp extends GameApplication {
         settings.setWidth(WINDOW_WIDTH);
         settings.setHeight(WINDOW_HEIGHT);
         settings.setMainMenuEnabled(true);
-        settings.setSceneFactory(new MainMenuFactory());
+        settings.setSceneFactory(new MenuFactory());
     }
 
     protected final void initGameVars(final Map<String, Object> vars) {

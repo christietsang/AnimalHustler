@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
  * @author Belal Kourkmas
  * @version 2022
  */
-public class MainMenuFactory extends SceneFactory {
+public class MenuFactory extends SceneFactory {
 
     /**
      * Creates a new main menu.
