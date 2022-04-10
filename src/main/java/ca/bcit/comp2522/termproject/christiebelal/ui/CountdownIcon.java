@@ -6,8 +6,6 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -83,7 +81,7 @@ public class CountdownIcon extends Icon {
                     }
                     VBox scoreBox = createScoreBox(allScores);
                     Button btnClose = createMainMenuButton();
-                    getDialogService().showBox("Your Score:", scoreBox, btnClose);
+                    getDialogService().showBox("RESULTS", scoreBox, btnClose);
                 }
             }
         }, Duration.seconds(1), timerCondition);
@@ -92,12 +90,7 @@ public class CountdownIcon extends Icon {
     private Button createMainMenuButton() {
         Button btnClose = getUIFactoryService().newButton("Return to main menu");
         btnClose.setPrefWidth(CLOSE_BUTTON_WIDTH);
-        btnClose.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(final ActionEvent actionEvent) {
-                getGameController().gotoMainMenu();
-            }
-        });
+        btnClose.setOnAction(actionEvent -> getGameController().gotoMainMenu());
         return btnClose;
     }
 
