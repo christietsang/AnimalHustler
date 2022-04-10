@@ -4,8 +4,6 @@ import com.almasb.fxgl.app.scene.FXGLMenu;
 import com.almasb.fxgl.app.scene.MenuType;
 import com.almasb.fxgl.dsl.FXGL;
 import javafx.beans.binding.StringBinding;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -13,6 +11,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.Text;
+import org.jetbrains.annotations.NotNull;
 
 import java.sql.SQLException;
 
@@ -30,115 +29,159 @@ public class MainMenu extends FXGLMenu {
     private TextField password;
     private Text badLogin;
 
-    public MainMenu(MenuType type) {
+    /**
+     * Constructs a main menu.
+     */
+    public MainMenu() {
         super(MenuType.MAIN_MENU);
-        username = new TextField();
-        username.setPromptText("Username");
-        username.setTranslateX(368);
-        username.setTranslateY(270);
-        username.setPrefWidth(204);
-        username.setPrefHeight(39);
-
-        password = new TextField();
-        password.setPromptText("Password");
-        password.setTranslateX(368);
-        password.setTranslateY(430);
-        password.setPrefWidth(204);
-        password.setPrefHeight(39);
+        username = createUsername();
+        password = createPassword();
+        badLogin = createBadLogin();
         addChild(username);
         addChild(password);
-
-        Button loginButton = new Button("Login");
-        loginButton.setPrefSize(142, 80);
-        loginButton.setTranslateX(490);
-        loginButton.setTranslateY(560);
-
-        badLogin = new Text("Account not found");
-        badLogin.resize(142, 80);
-        badLogin.setFont(Font.font("Lucida Sans Unicode", FontPosture.REGULAR, 20));
-        badLogin.setTranslateX(380);
-        badLogin.setTranslateY(520);
-
+        Button loginButton = createLoginButton();
+        Button createButton = createCreateButton();
+        addChild(loginButton);
         // Login button
-        loginButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                String usernameString = username.getText();
-                String passwordString = password.getText();
-                removeChild(badLogin);
-                try {
-                    if (DatabaseHandler.checkUserNamePassword(usernameString, passwordString)) {
-                        currentUsername = usernameString;
-                        fireNewGame();
-                    } else {
-                        addChild(badLogin);
-                    }
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    e.printStackTrace();
+        loginHandler(loginButton);
+        // Create account button
+        createAccountHandler(createButton);
+    }
+
+    private void loginHandler(final Button loginButton) {
+        loginButton.setOnAction(actionEvent -> {
+            String usernameString = username.getText();
+            String passwordString = password.getText();
+            removeChild(badLogin);
+            try {
+                if (DatabaseHandler.checkUserNamePassword(usernameString, passwordString)) {
+                    currentUsername = usernameString;
+                    fireNewGame();
+                } else {
+                    addChild(badLogin);
                 }
+            } catch (ClassNotFoundException | SQLException e) {
+                e.printStackTrace();
             }
         });
-        addChild(loginButton);
+    }
 
-        Button createButton = new Button("Create Account");
-        createButton.setPrefSize(142, 80);
-        createButton.setTranslateX(319);
-        createButton.setTranslateY(560);
-
+    private void createAccountHandler(final Button createButton) {
         // Create account button
-        createButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                String usernameString = username.getText();
-                String passwordString = password.getText();
-                removeChild(badLogin);
-                try {
-                    if (
-                            DatabaseHandler.CreateUserName(usernameString, passwordString)) {
-                        currentUsername = usernameString;
-                        fireNewGame();
-                    } else {
-                        addChild(badLogin);
-                    }
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    e.printStackTrace();
+        createButton.setOnAction(actionEvent -> {
+            String usernameString = username.getText();
+            String passwordString = password.getText();
+            removeChild(badLogin);
+            try {
+                if (
+                        DatabaseHandler.CreateUserName(usernameString, passwordString)) {
+                    currentUsername = usernameString;
+                    fireNewGame();
+                } else {
+                    addChild(badLogin);
                 }
+            } catch (ClassNotFoundException | SQLException e) {
+                e.printStackTrace();
             }
         });
         addChild(createButton);
     }
 
+
+    private Text createBadLogin() {
+        final int textSizeWidth = 142;
+        final int textSizeHeight = 80;
+        final int textFontSize = 20;
+        final int textPositionX = 380;
+        final int textPositionY = 520;
+        badLogin = new Text("Account not found");
+        badLogin.resize(textSizeWidth, textSizeHeight);
+        badLogin.setFont(Font.font("Lucida Sans Unicode", FontPosture.REGULAR, textFontSize));
+        badLogin.setTranslateX(textPositionX);
+        badLogin.setTranslateY(textPositionY);
+        return badLogin;
+    }
+
+    private Button createCreateButton() {
+        final int buttonSizeWidth = 142;
+        final int buttonSizeHeight = 80;
+        final int buttonPositionX = 319;
+        final int buttonPositionY = 560;
+        Button createButton = new Button("Create Account");
+        createButton.setPrefSize(buttonSizeWidth, buttonSizeHeight);
+        createButton.setTranslateX(buttonPositionX);
+        createButton.setTranslateY(buttonPositionY);
+        return createButton;
+    }
+
+    private Button createLoginButton() {
+        final int buttonSizeWidth = 142;
+        final int buttonSizeHeight = 80;
+        final int buttonPositionX = 490;
+        final int buttonPositionY = 560;
+        Button loginButton = new Button("Login");
+        loginButton.setPrefSize(buttonSizeWidth, buttonSizeHeight);
+        loginButton.setTranslateX(buttonPositionX);
+        loginButton.setTranslateY(buttonPositionY);
+        return loginButton;
+    }
+
+    private TextField createUsername() {
+        final int textFieldWidth = 204;
+        final int textFieldHeight = 39;
+        final int textFieldPositionX = 368;
+        final int textFieldPositionY = 270;
+        username = new TextField();
+        username.setPromptText("Username");
+        username.setTranslateX(textFieldPositionX);
+        username.setTranslateY(textFieldPositionY);
+        username.setPrefWidth(textFieldWidth);
+        username.setPrefHeight(textFieldHeight);
+        return username;
+    }
+
+    private TextField createPassword() {
+        final int textFieldWidth = 204;
+        final int textFieldHeight = 39;
+        final int textFieldPositionX = 368;
+        final int textFieldPositionY = 430;
+        password = new TextField();
+        password.setPromptText("Password");
+        password.setTranslateX(textFieldPositionX);
+        password.setTranslateY(textFieldPositionY);
+        password.setPrefWidth(textFieldWidth);
+        password.setPrefHeight(textFieldHeight);
+        return password;
+    }
+
     @Override
-    protected Button createActionButton(StringBinding stringBinding, Runnable runnable) {
+    protected final Button createActionButton(@NotNull final StringBinding stringBinding,
+                                              @NotNull final Runnable runnable) {
         return null;
     }
 
     @Override
-    protected Button createActionButton(String s, Runnable runnable) {
+    protected final Button createActionButton(@NotNull final String s, @NotNull final Runnable runnable) {
         return null;
     }
 
     @Override
-    protected Node createBackground(double w, double h) {
+    protected final Node createBackground(final double w, final double h) {
         return FXGL.texture("background/menu.png");
     }
 
     @Override
-    protected Node createProfileView(String s) {
+    protected final Node createProfileView(@NotNull final String s) {
         return null;
     }
 
     @Override
-    protected Node createTitleView(String s) {
+    protected final Node createTitleView(@NotNull final String s) {
         return new Rectangle();
     }
 
     @Override
-    protected Node createVersionView(String s) {
+    protected final Node createVersionView(@NotNull final String s) {
         return new Rectangle();
     }
 }
