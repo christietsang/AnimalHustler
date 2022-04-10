@@ -1,6 +1,7 @@
 package ca.bcit.comp2522.termproject.christiebelal.ui;
 
 import ca.bcit.comp2522.termproject.christiebelal.DatabaseHandler;
+import com.almasb.fxgl.audio.AudioPlayer;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
@@ -17,11 +18,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static ca.bcit.comp2522.termproject.christiebelal.Variables.Variables.currentUsername;
-import static com.almasb.fxgl.dsl.FXGL.getDialogService;
-import static com.almasb.fxgl.dsl.FXGL.getGameController;
-import static com.almasb.fxgl.dsl.FXGL.getGameTimer;
-import static com.almasb.fxgl.dsl.FXGL.getUIFactoryService;
-import static com.almasb.fxgl.dsl.FXGL.geti;
+import static com.almasb.fxgl.dsl.FXGL.*;
 
 /**
  * Handles the countdown clock GUI.
@@ -82,6 +79,7 @@ public class CountdownIcon extends Icon {
                     VBox scoreBox = createScoreBox(allScores);
                     Button btnClose = createMainMenuButton();
                     getDialogService().showBox("RESULTS", scoreBox, btnClose);
+                    getAudioPlayer().stopAllSoundsAndMusic();
                 }
             }
         }, Duration.seconds(1), timerCondition);
