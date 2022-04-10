@@ -28,7 +28,7 @@ import static ca.bcit.comp2522.termproject.christiebelal.Variables.Variables.cur
 public class MainMenu extends FXGLMenu {
     private TextField username;
     private TextField password;
-    private TextField badLogin;
+    private Text badLogin;
 
     public MainMenu(MenuType type) {
         super(MenuType.MAIN_MENU);
@@ -53,7 +53,7 @@ public class MainMenu extends FXGLMenu {
         loginButton.setTranslateX(490);
         loginButton.setTranslateY(560);
 
-        Text badLogin = new Text("Account not found");
+        badLogin = new Text("Account not found");
         badLogin.resize(142, 80);
         badLogin.setFont(Font.font("Lucida Sans Unicode", FontPosture.REGULAR, 20));
         badLogin.setTranslateX(380);

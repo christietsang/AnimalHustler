@@ -65,8 +65,6 @@ public class AnimalHustlerApp extends GameApplication {
             @Override
             protected void onActionEnd() {
                 player.getComponent(PlayerComponent.class).stop();
-                System.out.println(getGameWorld().getCollidingEntities(player));
-
             }
         }, KeyCode.A, VirtualButton.LEFT);
 

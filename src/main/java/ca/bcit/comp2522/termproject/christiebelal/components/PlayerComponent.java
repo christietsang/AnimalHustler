@@ -129,7 +129,6 @@ public class PlayerComponent extends Component {
         public void left() {
 //        getEntity().setScaleX(-1);
         physics.setVelocityX(speed * -1);
-            System.out.println(speed);
     }
 
     public void right() {
