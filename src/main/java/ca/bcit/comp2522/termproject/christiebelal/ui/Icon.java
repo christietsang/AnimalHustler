@@ -4,8 +4,6 @@ import javafx.scene.Parent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-import java.awt.*;
-
 /**
  * Is the parent class for in-game icons.
  *
