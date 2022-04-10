@@ -1,7 +1,6 @@
 package ca.bcit.comp2522.termproject.christiebelal.ui;
 
 import ca.bcit.comp2522.termproject.christiebelal.DatabaseHandler;
-import com.almasb.fxgl.audio.AudioPlayer;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
