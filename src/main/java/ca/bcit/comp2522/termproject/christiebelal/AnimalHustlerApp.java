@@ -22,19 +22,7 @@ import static ca.bcit.comp2522.termproject.christiebelal.AnimalHustlerType.COW;
 import static ca.bcit.comp2522.termproject.christiebelal.Variables.Variables.CURRENT_LEVEL;
 import static ca.bcit.comp2522.termproject.christiebelal.Variables.Variables.MONEY;
 import static ca.bcit.comp2522.termproject.christiebelal.Variables.Variables.SPAWN_TIMER;
-import static com.almasb.fxgl.dsl.FXGL.addUINode;
-import static com.almasb.fxgl.dsl.FXGL.getAppHeight;
-import static com.almasb.fxgl.dsl.FXGL.getAppWidth;
-import static com.almasb.fxgl.dsl.FXGL.getGameTimer;
-import static com.almasb.fxgl.dsl.FXGL.getGameWorld;
-import static com.almasb.fxgl.dsl.FXGL.getInput;
-import static com.almasb.fxgl.dsl.FXGL.getPhysicsWorld;
-import static com.almasb.fxgl.dsl.FXGL.geti;
-import static com.almasb.fxgl.dsl.FXGL.inc;
-import static com.almasb.fxgl.dsl.FXGL.play;
-import static com.almasb.fxgl.dsl.FXGL.set;
-import static com.almasb.fxgl.dsl.FXGL.setLevelFromMap;
-import static com.almasb.fxgl.dsl.FXGL.spawn;
+import static com.almasb.fxgl.dsl.FXGL.*;
 
 /**
  * Drives the game.
@@ -44,7 +32,7 @@ import static com.almasb.fxgl.dsl.FXGL.spawn;
  * @version 2022
  */
 public class AnimalHustlerApp extends GameApplication {
-    private static final int GAME_LENGTH_SECONDS = 10;
+    private static final int GAME_LENGTH_SECONDS = 80;
     private static final int COW_FLAT_BONUS = 50;
     private static final int COW_HEALTH_MULTIPLIER = 10;
     private static final int PLAYER_STARTING_X = 450;
@@ -101,7 +89,7 @@ public class AnimalHustlerApp extends GameApplication {
         player.getComponent(PlayerComponent.class);
         countdownIcon = new CountdownIcon();
         loadCurrentLevel();
-        play("background.wav");
+        getAudioPlayer().loopMusic(getAssetLoader().loadMusic("background.wav"));
     }
 
     private void initializeValues() {
