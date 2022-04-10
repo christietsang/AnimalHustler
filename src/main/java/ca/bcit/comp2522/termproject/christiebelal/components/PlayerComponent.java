@@ -22,8 +22,10 @@ public class PlayerComponent extends Component {
     private static final int FRAME_WIDTH_HEIGHT = 72;
     private static final double ANIMATION_DURATION = 0.66;
     private static final int ENDING_FRAME = 3;
-    private int speed = 300;
+    private static final int NUM_SPEED = 300;
     private static final int SPEED_INCREMENT = 10;
+    private static final int MSG_DURATION = 3;
+    private int speed = NUM_SPEED;
 
     private PhysicsComponent physics;
 
@@ -40,6 +42,9 @@ public class PlayerComponent extends Component {
     private final AnimationChannel animWalkRight;
     private final AnimationChannel animWalkLeft;
 
+    /**
+     * Handles animations for the character.
+     */
     public PlayerComponent() {
         Image imageDown = image("ACharDown.png");
         Image imageUp = image("ACharUp.png");
@@ -69,12 +74,22 @@ public class PlayerComponent extends Component {
         textureRight = new AnimatedTexture(animIdleRight);
 
     }
+
+    /**
+     * Increases player speed.
+     */
     public void increaseSpeed() {
         speed += SPEED_INCREMENT;
     }
+
+    /**
+     * Animates the character walking in each direction.
+     *
+     * @param tpf is the time per frame for animation, must be a double
+     */
     @Override
     public void onUpdate(final double tpf) {
-        if (physics.getVelocityX() > 0 && physics.isMovingX()) {
+        if (this.physics.getVelocityX() > 0 && physics.isMovingX()) {
             texturesRight(textureRight, textureLeft, animWalkRight);
         }
         if (physics.getVelocityX() < 0 && physics.isMovingX()) {
@@ -90,13 +105,12 @@ public class PlayerComponent extends Component {
 
     private void tutorial() {
         getNotificationService().setBackgroundColor(Color.BLUE);
-        getGameTimer().runOnceAfter(() -> {
-            getNotificationService().pushNotification("WASD to Move");
-        }, Duration.millis(1));
-        getGameTimer().runOnceAfter(() -> {
-            getNotificationService().pushNotification("Feed the cows to get money!");
-        }, Duration.seconds(3));
+        getGameTimer().runOnceAfter(() -> getNotificationService().pushNotification("WASD to Move"),
+                Duration.millis(1));
+        getGameTimer().runOnceAfter(() -> getNotificationService().pushNotification("Feed the cows to get money!"),
+                Duration.seconds(MSG_DURATION));
     }
+
     private void texturesDown(final AnimatedTexture localTextureDown, final AnimatedTexture localTextureUp,
                               final AnimatedTexture localTextureLeft, final AnimatedTexture localTextureRight,
                               final AnimationChannel localAnimWalkDown) {
@@ -111,14 +125,19 @@ public class PlayerComponent extends Component {
         }
     }
 
-    private void texturesUp(final AnimatedTexture localTextureUp, final AnimatedTexture localTextureLeft, final AnimatedTexture localTextureRight, final AnimationChannel localAnimWalkUp) {
+    private void texturesUp(final AnimatedTexture localTextureUp, final AnimatedTexture localTextureLeft, final
+    AnimatedTexture localTextureRight, final AnimationChannel localAnimWalkUp) {
         texturesDown(localTextureUp, textureDown, localTextureLeft, localTextureRight, localAnimWalkUp);
     }
 
-    private void texturesRight(final AnimatedTexture localTextureRight, final AnimatedTexture localTextureLeft, final AnimationChannel localAnimWalkRight) {
+    private void texturesRight(final AnimatedTexture localTextureRight, final AnimatedTexture localTextureLeft, final
+    AnimationChannel localAnimWalkRight) {
         texturesUp(localTextureRight, textureUp, localTextureLeft, localAnimWalkRight);
     }
 
+    /**
+     * Handles behavior of character when first spawned.
+     */
     @Override
     public void onAdded() {
         entity.getTransformComponent().setScaleOrigin(new Point2D(0, 0));
@@ -126,26 +145,41 @@ public class PlayerComponent extends Component {
         tutorial();
     }
 
-        public void left() {
+    /**
+     * Increases player speed when moving to the left.
+     */
+    public void left() {
 //        getEntity().setScaleX(-1);
         physics.setVelocityX(speed * -1);
     }
 
+    /**
+     * Increases player speed when moving to the right.
+     */
     public void right() {
 //        getEntity().setScaleX(1);
         physics.setVelocityX(speed);
     }
 
+    /**
+     * Increases player speed when moving up the map.
+     */
     public void up() {
 //        getEntity().setScaleY(1);
         physics.setVelocityY(speed * -1);
     }
 
+    /**
+     * Increases player speed when moving down the map.
+     */
     public void down() {
 //        getEntity().setScaleY(-1);
         physics.setVelocityY(speed);
     }
 
+    /**
+     * Stops character movement and animation.
+     */
     public void stop() {
         physics.setVelocityX(0);
         physics.setVelocityY(0);
