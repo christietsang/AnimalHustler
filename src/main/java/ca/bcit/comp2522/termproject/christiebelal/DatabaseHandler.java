@@ -1,6 +1,7 @@
 package ca.bcit.comp2522.termproject.christiebelal;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Properties;
 
 /**
@@ -34,7 +35,6 @@ public final class DatabaseHandler {
         Statement stmt = createConnection().createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE user_id = '" + usernameEntry + "' AND password = '" + passwordEntry + "'");
         boolean works = rs.next();
-        System.out.println(works);
         return works;
     }
 
@@ -47,8 +47,23 @@ public final class DatabaseHandler {
         }
         return false;
     }
+
     public static void addScore(String usernameEntry, int score) throws SQLException, ClassNotFoundException {
         Statement stmt = createConnection().createStatement();
-        stmt.executeUpdate("INSERT INTO scores VALUES('" + usernameEntry + "', " + score + ")");
+        stmt.executeUpdate("INSERT INTO userscores VALUES('" + usernameEntry + "', " + score + ")");
+    }
+
+    public static ArrayList<String> getTopScores() throws SQLException, ClassNotFoundException {
+        ArrayList<String> topScores = new ArrayList<>();
+        Statement stmt = createConnection().createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * \n" +
+                "FROM userscores\n" +
+                "ORDER BY scores DESC\n" +
+                "LIMIT 5");
+        while (rs.next()) {
+            topScores.add(rs.getString("user_id"));
+            topScores.add(rs.getString("scores"));
         }
+        return topScores;
+    }
 }
