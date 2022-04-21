@@ -58,11 +58,28 @@ public class AnimalHustlerApp extends GameApplication {
         vars.put(MONEY, 0);
         vars.put(CURRENT_LEVEL, 0);
     }
+
     protected final void initInput() {
+        getInput().addAction(new UserAction("escape") {
+            @Override
+            protected void onAction() {
+                getAudioPlayer().pauseAllMusic();
+            }
+
+            @Override
+            protected void onActionEnd() {
+                getAudioPlayer().pauseAllMusic();
+            }
+        }, KeyCode.ESCAPE);
         moveLeft();
         moveRight();
         moveUp();
         moveDown();
+
+    }
+    @Override
+    protected void onUpdate(double tpf) {
+        getAudioPlayer().resumeAllMusic();
     }
 
     protected final void initUI() {
@@ -203,8 +220,10 @@ public class AnimalHustlerApp extends GameApplication {
 
     private void loadCurrentLevel() {
         set(CURRENT_LEVEL, geti(CURRENT_LEVEL) + 1);
+        getAudioPlayer().stopAllSoundsAndMusic();
         countdownIcon.setCountdown(GAME_LENGTH_SECONDS);
     }
+
 
     /**
      * Starts the game.
