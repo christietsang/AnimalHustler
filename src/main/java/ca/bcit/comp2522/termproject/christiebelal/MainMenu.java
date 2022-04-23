@@ -16,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import java.sql.SQLException;
 
 import static ca.bcit.comp2522.termproject.christiebelal.Variables.Variables.currentUsername;
+import static com.almasb.fxgl.dsl.FXGL.getAudioPlayer;
 
 /**
  * Handles the main menu log in.
@@ -65,6 +66,7 @@ public class MainMenu extends FXGLMenu {
             }
         });
     }
+
 
     private void createAccountHandler(final Button createButton) {
         // Create account button

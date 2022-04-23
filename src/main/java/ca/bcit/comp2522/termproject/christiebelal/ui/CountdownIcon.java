@@ -72,7 +72,7 @@ public class CountdownIcon extends Icon {
                     }
                     StringBuilder allScores = new StringBuilder();
                     for (int i = 0; i < top.size(); i += 2) {
-                        allScores.append(String.format("\t\t\t\t%d: %-20.20s \t %20s\n", (i / 2 + 1), top.get(i), "$"
+                        allScores.append(String.format("\t\t\t\t%d: %-20.20s \t %20.20s\n", (i / 2 + 1), top.get(i), "$"
                                 + top.get(i + 1)));
                     }
                     VBox scoreBox = createScoreBox(allScores);
