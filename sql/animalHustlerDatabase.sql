@@ -38,7 +38,7 @@ DROP TABLE IF EXISTS `userscores`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `userscores` (
   `user_id` varchar(255) NOT NULL,
-  `scores` varchar(255) NOT NULL
+  `scores` integer(255) NOT NULL
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
