@@ -153,8 +153,6 @@ Project Link: [https://github.com/christietsang/2522-Term-Project-ChristieBelal]
 * [Examples of Existing FXGL Games](https://github.com/AlmasB/FXGLGames)
 * [FXGL Wiki](https://github.com/AlmasB/FXGL/wiki/FXGL-11)
 
-Lastly, a warm thank you to Chris Thompson for the fun project!
-
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
