@@ -116,8 +116,8 @@ land, productivity, product yield will be significant.
 - [X] Establish asset library
 - [X] Create logic for character control, animation, and animal spawn
 - [X] Create a main menu with custom login
-- [ ] Establish in-game timer & currency system
-- [ ] Progressively up in-game character speed and cow spawn time
+- [x] Establish in-game timer & currency system
+- [x] Progressively up in-game character speed and cow spawn time
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
