@@ -58,12 +58,7 @@
 
 Your parents have left town and have left you in charge of running the family farm for three months.
 The good news is that you keep the profits of whatever you earn!  Can you make enough tuition and pocket money to attend school in the fall?
-Players will start with a single animal and can profit by taking a range of actions - selling it for meat, keeping it for breeding, or
-selling animal byproducts such as wool, eggs, milk, or cheese. Farm maintenance is integral because animals get hungry, so the player has to walk
-around and feed them, or they’ll die.  
-
-Farm expansion will be necessary for the player to meet their endgame goal.  As such, upgrades such as increased
-land, productivity, product yield will be significant.
+Move your avatar around the map using W,A,S,D controls and run into a cow to feed it.  The faster you feed it, the more coins you get!  Beware of nasty surprises if you don't feed a cow in time.  As the game progresses, cows will spawn faster and faster.  Try and feed them all!
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
